@@ -42,7 +42,6 @@ a { color: inherit; text-decoration: none; }
   min-height: 100svh;
   align-items: flex-end;
   overflow: hidden;
-  padding-top: env(safe-area-inset-top, 0px);
   background: #244b5d;
   color: #fff;
 }
