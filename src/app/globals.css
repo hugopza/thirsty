@@ -42,6 +42,7 @@ a { color: inherit; text-decoration: none; }
   min-height: 100svh;
   align-items: flex-end;
   overflow: hidden;
+  padding-top: env(safe-area-inset-top, 0px);
   background: #244b5d;
   color: #fff;
 }
@@ -55,7 +56,7 @@ a { color: inherit; text-decoration: none; }
   padding: env(safe-area-inset-top) 1.15rem 0;
 }
 .hero__video, .hero__shade { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero__video { object-fit: cover; object-position: center; }
+.hero__video { display: block; object-fit: cover; object-position: center; }
 .hero__shade {
   background: linear-gradient(180deg, rgba(9, 24, 30, 0.14), rgba(9, 24, 30, 0.02) 42%, rgba(9, 24, 30, 0.86));
 }
