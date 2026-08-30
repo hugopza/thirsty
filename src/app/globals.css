@@ -245,7 +245,10 @@ a { color: inherit; text-decoration: none; }
   outline: none;
   box-shadow: 0 0 0 3px rgba(88, 201, 241, 0.32);
 }
-.custom-form select:focus-visible, .custom-form input:focus-visible,
+.custom-form select:focus-visible, .custom-form input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(88, 201, 241, 0.32);
+}
 .button:focus-visible, .finder-secondary button:focus-visible, .sheet__close:focus-visible,
 .hero__cta:focus-visible {
   outline: 3px solid var(--pink);
@@ -337,7 +340,11 @@ a { color: inherit; text-decoration: none; }
   line-height: 1;
 }
 .sheet h2 { max-width: 8ch; padding-right: 2rem; font-size: 2.8rem; line-height: 0.94; }
-.custom-form { display: grid; margin-top: 1.5rem; }
+.custom-form {
+  display: grid;
+  margin-top: 1.5rem;
+  -webkit-tap-highlight-color: transparent;
+}
 .custom-form label:not(:first-child) { margin-top: 0.8rem; }
 .custom-form .button { margin-top: 1.2rem; }
 .button--dark { background: var(--ink); color: #fff; }
