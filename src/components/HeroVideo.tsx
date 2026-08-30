@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { publicAsset } from "@/lib/site";
 
 const FADE_DURATION = 650;
 
@@ -79,15 +80,18 @@ export function HeroVideo() {
       loop
       playsInline
       preload="metadata"
-      poster="/media/viatge-estudiants-menorca-hero-poster.webp"
+      poster={publicAsset("/media/viatge-estudiants-menorca-hero-poster.webp")}
       aria-hidden="true"
     >
       <source
-        src="/media/menorca-experiencia-hero-mobile.mp4"
+        src={publicAsset("/media/menorca-experiencia-hero-mobile.mp4")}
         media="(max-width: 767px)"
         type="video/mp4"
       />
-      <source src="/media/menorca-experiencia-hero-desktop.mp4" type="video/mp4" />
+      <source
+        src={publicAsset("/media/menorca-experiencia-hero-desktop.mp4")}
+        type="video/mp4"
+      />
     </video>
   );
 }

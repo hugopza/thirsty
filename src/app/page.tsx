@@ -1,6 +1,7 @@
 import { ExperienceCollages } from "@/components/ExperienceCollages";
 import { GroupFinder } from "@/components/GroupFinder";
 import { HeroVideo } from "@/components/HeroVideo";
+import { publicAsset } from "@/lib/site";
 import Image from "next/image";
 
 export default function ThirstyExperiencesPage() {
@@ -10,7 +11,7 @@ export default function ThirstyExperiencesPage() {
         <div className="topbar" aria-label="Capçalera">
           <Image
             className="brand-logo brand-logo--header"
-            src="/media/thirsty-logo-transparent.webp"
+            src={publicAsset("/media/thirsty-logo-transparent.webp")}
             alt="Thirsty"
             width={800}
             height={312}
@@ -33,7 +34,7 @@ export default function ThirstyExperiencesPage() {
       <footer className="footer">
         <Image
           className="brand-logo brand-logo--footer"
-          src="/media/thirsty-logo-transparent.webp"
+          src={publicAsset("/media/thirsty-logo-transparent.webp")}
           alt="Thirsty"
           width={800}
           height={312}

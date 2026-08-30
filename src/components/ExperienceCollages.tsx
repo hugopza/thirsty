@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { publicAsset } from "@/lib/site";
 
 const slides = [
   {
@@ -44,7 +45,7 @@ export function ExperienceCollages() {
             {slide.images.map(([src, alt], imageIndex) => (
               <div className="collage__image" key={src}>
                 <Image
-                  src={src}
+                  src={publicAsset(src)}
                   alt={alt}
                   fill
                   sizes="(max-width: 767px) 86vw, 38vw"
