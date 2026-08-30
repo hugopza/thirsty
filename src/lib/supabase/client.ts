@@ -1,8 +1,9 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "./types";
 
-let browserClient: SupabaseClient | undefined;
+let browserClient: SupabaseClient<Database> | undefined;
 
-export function createSupabaseBrowserClient(): SupabaseClient {
+export function createSupabaseBrowserClient(): SupabaseClient<Database> {
   if (browserClient) {
     return browserClient;
   }
@@ -16,7 +17,6 @@ export function createSupabaseBrowserClient(): SupabaseClient {
     );
   }
 
-  browserClient = createClient(supabaseUrl, supabaseAnonKey);
+  browserClient = createClient<Database>(supabaseUrl, supabaseAnonKey);
   return browserClient;
 }
-

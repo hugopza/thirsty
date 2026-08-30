@@ -12,14 +12,6 @@ const REQUIRED_COLUMNS = [
   "LINK GRUP DE WHATSAPP",
 ] as const;
 
-type SourceRow = {
-  rowNumber: number;
-  comarca: string;
-  location: string;
-  institute: string | null;
-  whatsappUrl: string | null;
-};
-
 type Warning = {
   rowNumber: number;
   location: string | null;
@@ -396,4 +388,3 @@ main().catch((error: unknown) => {
   console.error(error instanceof Error ? error.message : error);
   process.exitCode = 1;
 });
-

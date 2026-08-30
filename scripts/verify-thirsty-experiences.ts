@@ -28,9 +28,19 @@ const anon = createClient(url, anonKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
-async function count(table: string, filter?: (query: any) => any): Promise<number> {
+type CountableTable =
+  | "comarques"
+  | "locations"
+  | "institutes"
+  | "whatsapp_groups";
+
+async function count(
+  table: CountableTable,
+  linkFilter?: "with-link" | "without-link",
+): Promise<number> {
   let query = service.from(table).select("id", { count: "exact", head: true });
-  if (filter) query = filter(query);
+  if (linkFilter === "with-link") query = query.not("whatsapp_url", "is", null);
+  if (linkFilter === "without-link") query = query.is("whatsapp_url", null);
   const { count: result, error } = await query;
   if (error) throw new Error(`${table} count failed: ${error.message}`);
   return result ?? 0;
@@ -42,8 +52,8 @@ async function main(): Promise<void> {
       count("comarques"),
       count("locations"),
       count("institutes"),
-      count("whatsapp_groups", (query) => query.not("whatsapp_url", "is", null)),
-      count("whatsapp_groups", (query) => query.is("whatsapp_url", null)),
+      count("whatsapp_groups", "with-link"),
+      count("whatsapp_groups", "without-link"),
     ]);
 
   const publicTables = ["comarques", "locations", "institutes", "whatsapp_groups"];
