@@ -33,13 +33,18 @@ export const metadata: Metadata = {
     description: "Troba el grup de WhatsApp del teu institut per al vostre viatge a Menorca.",
     images: [socialImage],
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Thirsty",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#f4ff36",
+  themeColor: "#07181f",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
