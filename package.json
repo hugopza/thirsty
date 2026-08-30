@@ -1,0 +1,18 @@
+{
+  "name": "thirsty-experiences",
+  "private": true,
+  "scripts": {
+    "import:thirsty": "tsx scripts/import-thirsty-experiences.ts",
+    "verify:supabase": "tsx scripts/verify-thirsty-experiences.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0",
+    "read-excel-file": "^9.3.10"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0",
+    "supabase": "^2.116.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
