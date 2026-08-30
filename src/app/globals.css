@@ -184,7 +184,10 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.055em;
   text-transform: uppercase;
 }
-.search-select { position: relative; }
+.search-select {
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
 .search-select__control { position: relative; }
 .search-select input, .custom-form select, .custom-form input {
   width: 100%;
@@ -237,7 +240,11 @@ a { color: inherit; text-decoration: none; }
   font-weight: 800;
 }
 .search-select__empty { color: var(--muted); }
-.search-select input:focus-visible, .custom-form select:focus-visible, .custom-form input:focus-visible,
+.search-select input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(88, 201, 241, 0.32);
+}
+.custom-form select:focus-visible, .custom-form input:focus-visible,
 .button:focus-visible, .finder-secondary button:focus-visible, .sheet__close:focus-visible,
 .hero__cta:focus-visible {
   outline: 3px solid var(--pink);
