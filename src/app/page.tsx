@@ -2,7 +2,6 @@ import { ExperienceCollages } from "@/components/ExperienceCollages";
 import { GroupFinder } from "@/components/GroupFinder";
 import { HeroVideo } from "@/components/HeroVideo";
 import { SocialLinks } from "@/components/SocialLinks";
-import { publicAsset } from "@/lib/site";
 import Image from "next/image";
 
 export default function ThirstyExperiencesPage() {
@@ -13,7 +12,7 @@ export default function ThirstyExperiencesPage() {
           <div className="partner-lockup" aria-label="Thirsty en col·laboració amb Neway">
             <Image
               className="brand-logo brand-logo--header"
-              src={publicAsset("/media/thirsty-logo-transparent.webp")}
+              src="/media/thirsty-logo-transparent.webp"
               alt="Thirsty"
               width={800}
               height={312}
@@ -22,7 +21,7 @@ export default function ThirstyExperiencesPage() {
             <span className="partner-lockup__cross" aria-hidden="true">×</span>
             <Image
               className="partner-lockup__neway"
-              src={publicAsset("/media/neway-logo-blanc.png")}
+              src="/media/neway-logo-blanc.png"
               alt="Neway"
               width={1126}
               height={146}
@@ -52,7 +51,7 @@ export default function ThirstyExperiencesPage() {
             <div className="footer__brand-lockup" aria-label="Thirsty i Neway">
               <Image
                 className="brand-logo brand-logo--footer"
-                src={publicAsset("/media/thirsty-logo-transparent.webp")}
+                src="/media/thirsty-logo-transparent.webp"
                 alt="Thirsty"
                 width={800}
                 height={312}
@@ -60,7 +59,7 @@ export default function ThirstyExperiencesPage() {
               <span aria-hidden="true">×</span>
               <Image
                 className="footer__neway"
-                src={publicAsset("/media/neway-logo-blanc.png")}
+                src="/media/neway-logo-blanc.png"
                 alt="Neway"
                 width={1126}
                 height={146}

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { isValidWhatsappUrl, selectBestGroup } from "@/lib/groups";
-import { publicAsset } from "@/lib/site";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { CustomGroupSheet } from "./CustomGroupSheet";
 import { SearchableSelect } from "./SearchableSelect";
@@ -234,12 +233,12 @@ export function GroupFinder() {
               loop
               playsInline
               preload="none"
-              poster={publicAsset("/media/viatge-estudiants-menorca-hero-poster.webp")}
+              poster="/media/viatge-estudiants-menorca-hero-poster.webp"
               aria-label="Experiència de viatge de final de curs a Menorca"
             >
               {loadSecondaryVideo && (
                 <source
-                  src={publicAsset("/media/thirsty-aftermovie-menorca-horizontal.mp4")}
+                  src="/media/thirsty-aftermovie-menorca-horizontal.mp4"
                   type="video/mp4"
                 />
               )}
@@ -251,6 +250,11 @@ export function GroupFinder() {
             onClick={() => setSheet({ open: true, island: "menorca" })}
           >
             Necessites un grup personalitzat?
+            <span className="finder-secondary__primary-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M7 17 17 7M9 7h8v8" />
+              </svg>
+            </span>
           </button>
           <button
             className="finder-secondary__islands"

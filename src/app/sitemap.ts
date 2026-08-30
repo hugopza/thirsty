@@ -1,12 +1,10 @@
 import type { MetadataRoute } from "next";
-
-export const dynamic = "force-static";
+import { siteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   return [
     {
-      url: baseUrl.replace(/\/$/, ""),
+      url: siteUrl,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,

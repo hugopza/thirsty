@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 const socialImage = `${siteUrl}/media/thirsty-experiences-menorca-og.webp`;
 
 export const metadata: Metadata = {
