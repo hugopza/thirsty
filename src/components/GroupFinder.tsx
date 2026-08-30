@@ -54,18 +54,29 @@ export function GroupFinder() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setLoadSecondaryVideo(true);
-          void video.play().catch(() => undefined);
+          if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+            void video.play().catch(() => undefined);
+          }
           return;
         }
 
         video.pause();
       },
-      { rootMargin: "300px 0px" },
+      { rootMargin: "800px 0px" },
     );
 
     observer.observe(video);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!loadSecondaryVideo) return;
+    const video = secondaryVideoRef.current;
+    if (!video) return;
+
+    video.load();
+    void video.play().catch(() => undefined);
+  }, [loadSecondaryVideo]);
 
   async function changeProvince(value: string) {
     groupRequestId.current += 1;
@@ -233,7 +244,7 @@ export function GroupFinder() {
               loop
               playsInline
               preload="none"
-              poster="/media/viatge-estudiants-menorca-hero-poster.webp"
+              poster="/media/thirsty-aftermovie-menorca-poster.webp"
               aria-label="Experiència de viatge de final de curs a Menorca"
             >
               {loadSecondaryVideo && (
