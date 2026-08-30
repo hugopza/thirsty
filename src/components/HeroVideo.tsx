@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { publicAsset } from "@/lib/site";
 
 const FADE_DURATION = 650;
+const clampVolume = (value: number) => Math.min(1, Math.max(0, value));
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -22,12 +23,13 @@ export function HeroVideo() {
 
     const fadeTo = (target: number) => {
       cancelFade();
-      const from = video.volume;
+      const from = clampVolume(video.volume);
+      const safeTarget = clampVolume(target);
       const startedAt = performance.now();
 
       const tick = (now: number) => {
-        const progress = Math.min((now - startedAt) / FADE_DURATION, 1);
-        video.volume = from + (target - from) * progress;
+        const progress = Math.min(1, Math.max(0, (now - startedAt) / FADE_DURATION));
+        video.volume = clampVolume(from + (safeTarget - from) * progress);
         if (progress < 1) frame.current = requestAnimationFrame(tick);
       };
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { isValidWhatsappUrl, selectBestGroup } from "@/lib/groups";
+import { publicAsset } from "@/lib/site";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { CustomGroupSheet } from "./CustomGroupSheet";
 import { SearchableSelect } from "./SearchableSelect";
@@ -23,6 +24,8 @@ export function GroupFinder() {
   const [loading, setLoading] = useState({ provinces: true, counties: false, institutes: false });
   const [result, setResult] = useState<Result>({ kind: "hidden" });
   const groupRequestId = useRef(0);
+  const secondaryVideoRef = useRef<HTMLVideoElement>(null);
+  const [loadSecondaryVideo, setLoadSecondaryVideo] = useState(false);
   const [sheet, setSheet] = useState<{ open: boolean; island: "menorca" | "" }>({
     open: false,
     island: "menorca",
@@ -42,6 +45,27 @@ export function GroupFinder() {
     return () => {
       current = false;
     };
+  }, []);
+
+  useEffect(() => {
+    const video = secondaryVideoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoadSecondaryVideo(true);
+          void video.play().catch(() => undefined);
+          return;
+        }
+
+        video.pause();
+      },
+      { rootMargin: "300px 0px" },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
   }, []);
 
   async function changeProvince(value: string) {
@@ -142,7 +166,7 @@ export function GroupFinder() {
               value={provinceId}
               options={provinces}
               loading={loading.provinces}
-              placeholder="Escriu o selecciona la teva província"
+              placeholder="Cerca una província"
               onChange={(value) => void changeProvince(value)}
             />
           </div>
@@ -156,7 +180,7 @@ export function GroupFinder() {
               options={counties}
               loading={loading.counties}
               disabled={!provinceId || loading.counties}
-              placeholder="Escriu o selecciona la teva comarca"
+              placeholder="Cerca una comarca"
               onChange={(value) => void changeCounty(value)}
             />
           </div>
@@ -170,7 +194,7 @@ export function GroupFinder() {
               options={institutes}
               loading={loading.institutes}
               disabled={!countyId || loading.institutes}
-              placeholder="Escriu o selecciona el teu institut"
+              placeholder="Cerca un institut"
               onChange={(value) => {
                 setInstituteId(value);
                 void loadGroup(value);
@@ -184,15 +208,14 @@ export function GroupFinder() {
               href={result.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Entrar al grup de WhatsApp"
             >
-              ENTRAR AL MEU GRUP DE WHATSAPP
+              ENTRAR AL GRUP
             </a>
           )}
           {result.kind !== "available" && (
             <button className="button button--finder" type="button" disabled>
-              {result.kind === "loading"
-                ? "CARREGANT EL GRUP…"
-                : "ENTRAR AL MEU GRUP DE WHATSAPP"}
+              ENTRAR AL GRUP
             </button>
           )}
           {result.kind === "pending" && (
@@ -203,11 +226,38 @@ export function GroupFinder() {
         </div>
 
         <div className="finder-secondary">
-          <button type="button" onClick={() => setSheet({ open: true, island: "menorca" })}>
+          <div className="finder-secondary__video">
+            <video
+              ref={secondaryVideoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              poster={publicAsset("/media/viatge-estudiants-menorca-hero-poster.webp")}
+              aria-label="Experiència de viatge de final de curs a Menorca"
+            >
+              {loadSecondaryVideo && (
+                <source
+                  src={publicAsset("/media/thirsty-aftermovie-menorca-horizontal.mp4")}
+                  type="video/mp4"
+                />
+              )}
+            </video>
+          </div>
+          <button
+            className="finder-secondary__primary"
+            type="button"
+            onClick={() => setSheet({ open: true, island: "menorca" })}
+          >
             Necessites un grup personalitzat?
           </button>
-          <button type="button" onClick={() => setSheet({ open: true, island: "" })}>
-            Vas a Mallorca o Eivissa?
+          <button
+            className="finder-secondary__islands"
+            type="button"
+            onClick={() => setSheet({ open: true, island: "" })}
+          >
+            Vols anar a Mallorca o Eivissa?
           </button>
         </div>
       </section>

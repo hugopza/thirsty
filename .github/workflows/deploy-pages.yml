@@ -22,6 +22,9 @@ jobs:
       NEXT_PUBLIC_SITE_URL: https://hugopza.github.io/thirsty
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_INSTAGRAM_URL: https://www.instagram.com/thirsty.cb/
+      NEXT_PUBLIC_TIKTOK_URL: "https://www.tiktok.com/@thirsty.cb?_r=1&_t=ZG-99Jf5zHSj8j"
+      NEXT_PUBLIC_WHATSAPP_COMMUNITY_URL: https://chat.whatsapp.com/Iz82uQG3zEtCjMajvD69ZJ
     steps:
       - name: Checkout
         uses: actions/checkout@v4
