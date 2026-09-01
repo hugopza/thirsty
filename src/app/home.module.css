@@ -3,7 +3,6 @@
   --home-ink-soft: #143845;
   --home-paper: #fffaf1;
   --home-cyan: #59c7ef;
-  --home-acid: #edff2b;
   min-height: 100%;
   overflow: hidden;
   background: var(--home-paper);
@@ -103,7 +102,7 @@
 
 .experiencesDoor {
   padding: 0.75rem;
-  background: var(--home-acid);
+  background: var(--home-cyan);
 }
 
 .experiencesCard {
