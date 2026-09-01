@@ -33,7 +33,12 @@ export default function ThirstyExperiencesPage() {
         <div className="hero__shade" />
         <div className="hero__copy">
           <h1>El viatge de final de curs comença aquí.</h1>
-          <a className="hero__cta" href="#troba-el-teu-grup">TROBAR EL MEU GRUP</a>
+          <a className="hero__cta" href="#troba-el-teu-grup">
+            TROBAR EL MEU GRUP
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
         </div>
       </header>
 
