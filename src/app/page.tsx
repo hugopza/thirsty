@@ -32,10 +32,8 @@ export const metadata: Metadata = {
   },
 };
 
-const events = [
-  { name: "Premiere", image: "/media/festa-thirsty-premiere.webp", alt: "Dues amigues a la festa Premiere de Thirsty", position: "center 38%" },
-  { name: "Barbie", image: "/media/festa-thirsty-barbie.webp", alt: "Pista plena durant la festa Barbie de Thirsty", position: "center" },
-];
+const nextPartyUrl =
+  "https://site.fourvenues.com/es/thirsty-costa-brava1/events/resacon-en-las-vegas---closing-beout-by-thirsty-12-09-2026-2099";
 
 const archives = [
   {
@@ -107,26 +105,31 @@ export default function HomePage() {
         <section className={styles.lightSection} aria-labelledby="dates-title">
           <div className={styles.sectionHead}>
             <h2 id="dates-title">Pròximes<br />dates.</h2>
-          
           </div>
           <div className={styles.eventTrack}>
-            {events.map((event) => (
-              <article className={styles.event} key={event.name}>
-                <Image src={event.image} alt={event.alt} fill sizes="(min-width: 800px) 31vw, 82vw" style={{ objectPosition: event.position }} />
-                <div className={styles.eventShade} />
-                <div className={styles.eventCopy}>
-                  <small>Properament</small>
-                  <h3>{event.name}</h3>
-                  <div className={styles.eventMeta}>
-                    <span>BeOut</span>
-                    <a href={instagramUrl} target="_blank" rel="noopener noreferrer">Entrades <Arrow diagonal /></a>
-                  </div>
-                </div>
-              </article>
-            ))}
+            <a
+              className={styles.event}
+              href={nextPartyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Comprar entrades per Resacón en Las Vegas, el 12 de setembre de 2026"
+            >
+              <span className={styles.eventPoster}>
+                <Image
+                  src="/media/festa-thirsty-resacon-las-vegas.webp"
+                  alt="Cartell de Resacón en Las Vegas, festa de tancament de Thirsty el 12 de setembre de 2026"
+                  fill
+                  sizes="(min-width: 800px) 31vw, 82vw"
+                />
+              </span>
+              <span className={styles.eventAction}>
+                Entrades
+                <Arrow diagonal />
+              </span>
+            </a>
             <article className={styles.soon}>
               <small>Coming soon</small>
-              <strong>La següent<br />pel·lícula.</strong>
+              <strong>Pròximes<br />festes.</strong>
               <small>No spoilers.</small>
             </article>
           </div>
