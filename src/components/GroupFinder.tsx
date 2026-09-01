@@ -129,7 +129,7 @@ export function GroupFinder() {
     const instituteIdNumber = Number(selectedInstituteId);
     const { data, error } = await createSupabaseBrowserClient()
       .from("whatsapp_groups")
-      .select("institute_id,whatsapp_url")
+      .select("institute_id,location_id,whatsapp_url")
       .eq("location_id", Number(countyId))
       .or(`institute_id.eq.${instituteIdNumber},institute_id.is.null`);
 
@@ -143,7 +143,10 @@ export function GroupFinder() {
       return;
     }
 
-    const group = selectBestGroup(data ?? [], instituteIdNumber);
+    const group = selectBestGroup(data ?? [], {
+      instituteId: instituteIdNumber,
+      locationId: Number(countyId),
+    });
     if (group && isValidWhatsappUrl(group.whatsapp_url)) {
       setResult({ kind: "available", url: group.whatsapp_url });
       return;
