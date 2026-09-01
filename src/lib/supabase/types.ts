@@ -16,9 +16,13 @@ type Table<Row, Insert = Partial<Row>, Update = Partial<Insert>> = {
 export type Database = {
   public: {
     Tables: {
-      comarques: Table<
+      provinces: Table<
         { id: number; name: string; slug: string },
         { id?: number; name: string; slug: string }
+      >;
+      comarques: Table<
+        { id: number; name: string; province_id: number | null; slug: string },
+        { id?: number; name: string; province_id?: number | null; slug: string }
       >;
       locations: Table<
         { id: number; comarca_id: number; name: string; slug: string },
@@ -31,14 +35,16 @@ export type Database = {
       whatsapp_groups: Table<
         {
           id: number;
+          comarca_id: number;
           institute_id: number | null;
-          location_id: number;
+          location_id: number | null;
           whatsapp_url: string | null;
         },
         {
           id?: number;
           institute_id?: number | null;
-          location_id: number;
+          comarca_id: number;
+          location_id?: number | null;
           whatsapp_url?: string | null;
         }
       >;

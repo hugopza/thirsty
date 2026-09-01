@@ -10,13 +10,23 @@ test("accepta només enllaços HTTPS oficials de WhatsApp", () => {
   assert.equal(isValidWhatsappUrl(null), false);
 });
 
-test("prioritza el grup de l'institut i conserva el grup general com a fallback", () => {
+test("prioritza institut, població i comarca per aquest ordre", () => {
   const rows = [
-    { institute_id: null, whatsapp_url: "https://chat.whatsapp.com/general" },
-    { institute_id: 12, whatsapp_url: null },
+    {
+      institute_id: null,
+      location_id: null,
+      whatsapp_url: "https://chat.whatsapp.com/comarca",
+    },
+    {
+      institute_id: null,
+      location_id: 5,
+      whatsapp_url: "https://chat.whatsapp.com/poblacio",
+    },
+    { institute_id: 12, location_id: 5, whatsapp_url: null },
   ];
 
-  assert.equal(selectBestGroup(rows, 12)?.institute_id, 12);
-  assert.equal(selectBestGroup(rows, 99)?.institute_id, null);
-  assert.equal(selectBestGroup([], 12), null);
+  assert.equal(selectBestGroup(rows, { instituteId: 12, locationId: 5 })?.institute_id, 12);
+  assert.equal(selectBestGroup(rows, { locationId: 5 })?.location_id, 5);
+  assert.equal(selectBestGroup(rows, { locationId: 99 })?.location_id, null);
+  assert.equal(selectBestGroup([], { locationId: 5 }), null);
 });
