@@ -79,7 +79,6 @@ export default function HomePage() {
           <Link href="/" aria-label="Thirsty, inici">
             <Image className={styles.logo} src="/media/thirsty-logo-transparent.webp" alt="Thirsty" width={800} height={312} priority />
           </Link>
-          <Link className={styles.topCta} href="/experiences">Experiences <Arrow /></Link>
         </nav>
         <div className={styles.heroCopy}>
           <h1>This is<br />Thirsty.</h1>
