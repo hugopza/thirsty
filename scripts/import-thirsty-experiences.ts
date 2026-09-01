@@ -4,8 +4,9 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import readXlsxFile from "read-excel-file/node";
 
 const SHEET_NAME = "Seguiment Instituts";
-const DEFAULT_FILE_NAME = "Localitats - Promos ThirstyExperiences.xlsx";
+const DEFAULT_FILE_NAME = "Localitats-Promos_ThirstyExperiences.xlsx";
 const REQUIRED_COLUMNS = [
+  "PROVINCIA",
   "Comarca",
   "Població",
   "Institut",
@@ -21,17 +22,21 @@ type Warning = {
 };
 
 type NamedRecord = { name: string; slug: string };
-type LocationRecord = NamedRecord & { comarcaName: string };
+type ComarcaRecord = NamedRecord & { provinceName: string };
+type LocationRecord = NamedRecord & { comarcaKey: string };
 type InstituteRecord = { name: string; locationKey: string };
 type GroupRecord = {
-  locationKey: string;
+  comarcaKey: string;
+  locationKey: string | null;
   instituteKey: string | null;
   whatsappUrl: string | null;
   sourceRow: number;
 };
 
 type ImportData = {
+  provinces: Map<string, NamedRecord>;
   comarques: Map<string, NamedRecord>;
+  comarcaRecords: Map<string, ComarcaRecord>;
   locations: Map<string, LocationRecord>;
   institutes: Map<string, InstituteRecord>;
   groups: Map<string, GroupRecord>;
@@ -73,17 +78,20 @@ function compositeKey(...parts: string[]): string {
   return parts.join("\u0000");
 }
 
-function parseArgs(): { filePath: string; dryRun: boolean } {
+function parseArgs(): { filePath: string; dryRun: boolean; replace: boolean } {
   const args = process.argv.slice(2);
   let filePath = process.env.THIRSTY_EXCEL_PATH
     ? resolve(process.env.THIRSTY_EXCEL_PATH)
     : resolve(process.cwd(), DEFAULT_FILE_NAME);
   let dryRun = false;
+  let replace = false;
 
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--dry-run") {
       dryRun = true;
+    } else if (arg === "--replace") {
+      replace = true;
     } else if (arg === "--file") {
       const nextValue = args[index + 1];
       if (!nextValue) throw new Error("--file requires a path");
@@ -94,7 +102,7 @@ function parseArgs(): { filePath: string; dryRun: boolean } {
     }
   }
 
-  return { filePath, dryRun };
+  return { filePath, dryRun, replace };
 }
 
 function loadLocalEnvironment(): void {
@@ -133,7 +141,9 @@ async function readImportData(filePath: string): Promise<ImportData> {
     }
   }
 
+  const provinces = new Map<string, NamedRecord>();
   const comarques = new Map<string, NamedRecord>();
+  const comarcaRecords = new Map<string, ComarcaRecord>();
   const locations = new Map<string, LocationRecord>();
   const institutes = new Map<string, InstituteRecord>();
   const groups = new Map<string, GroupRecord>();
@@ -147,18 +157,19 @@ async function readImportData(filePath: string): Promise<ImportData> {
     const rowNumber = index + 2;
     if (row.every((value) => trimToNull(value) === null)) continue;
 
+    const province = columnValue(row, "PROVINCIA");
     const comarca = columnValue(row, "Comarca");
     const location = columnValue(row, "Població");
     const institute = columnValue(row, "Institut");
     const whatsappUrl = columnValue(row, "LINK GRUP DE WHATSAPP");
 
-    if (!comarca || !location) {
+    if (!province || !comarca) {
       warnings.push({
         rowNumber,
         location,
         institute,
         value: whatsappUrl,
-        message: "Skipped row because Comarca or Població is empty",
+        message: "Skipped row because PROVINCIA or Comarca is empty",
       });
       continue;
     }
@@ -173,9 +184,10 @@ async function readImportData(filePath: string): Promise<ImportData> {
       });
     }
 
+    const provinceSlug = slugify(province);
     const comarcaSlug = slugify(comarca);
-    const locationSlug = slugify(location);
-    if (!comarcaSlug || !locationSlug) {
+    const locationSlug = location ? slugify(location) : null;
+    if (!provinceSlug || !comarcaSlug || (location && !locationSlug)) {
       warnings.push({
         rowNumber,
         location,
@@ -186,22 +198,38 @@ async function readImportData(filePath: string): Promise<ImportData> {
       continue;
     }
 
-    comarques.set(comarca, { name: comarca, slug: comarcaSlug });
-    const locationKey = compositeKey(comarca, location);
-    locations.set(locationKey, {
-      comarcaName: comarca,
-      name: location,
-      slug: locationSlug,
-    });
+    provinces.set(province, { name: province, slug: provinceSlug });
+    const comarcaKey = compositeKey(province, comarca);
+    comarques.set(comarcaKey, { name: comarca, slug: comarcaSlug });
+    comarcaRecords.set(comarcaKey, { name: comarca, slug: comarcaSlug, provinceName: province });
 
-    const instituteKey = institute
+    const locationKey = location ? compositeKey(comarcaKey, location) : null;
+    if (location && locationKey) {
+      locations.set(locationKey, {
+        comarcaKey,
+        name: location,
+        slug: locationSlug!,
+      });
+    }
+
+    const instituteKey = institute && locationKey
       ? compositeKey(locationKey, institute)
       : null;
     if (institute && instituteKey) {
-      institutes.set(instituteKey, { name: institute, locationKey });
+      institutes.set(instituteKey, { name: institute, locationKey: locationKey! });
     }
 
-    const groupKey = instituteKey ?? compositeKey(locationKey, "__general__");
+    if (institute && !locationKey) {
+      warnings.push({
+        rowNumber,
+        location,
+        institute,
+        value: whatsappUrl,
+        message: "Institut ignored because Població is empty",
+      });
+    }
+
+    const groupKey = instituteKey ?? locationKey ?? compositeKey(comarcaKey, "__general__");
     const previousGroup = groups.get(groupKey);
     if (
       previousGroup &&
@@ -216,6 +244,7 @@ async function readImportData(filePath: string): Promise<ImportData> {
       });
     }
     groups.set(groupKey, {
+      comarcaKey,
       locationKey,
       instituteKey,
       whatsappUrl,
@@ -224,7 +253,7 @@ async function readImportData(filePath: string): Promise<ImportData> {
   }
 
   const slugOwners = new Map<string, string>();
-  for (const comarca of comarques.values()) {
+  for (const comarca of comarcaRecords.values()) {
     const owner = slugOwners.get(comarca.slug);
     if (owner && owner !== comarca.name) {
       throw new Error(
@@ -235,22 +264,22 @@ async function readImportData(filePath: string): Promise<ImportData> {
   }
 
   for (const [locationKey, location] of locations) {
-    const scopedSlug = compositeKey(location.comarcaName, location.slug);
+    const scopedSlug = compositeKey(location.comarcaKey, location.slug);
     const owner = slugOwners.get(scopedSlug);
     if (owner && owner !== locationKey) {
       throw new Error(
-        `Location slug collision in ${location.comarcaName}: "${owner}" and "${location.name}"`,
+        `Location slug collision in ${location.comarcaKey}: "${owner}" and "${location.name}"`,
       );
     }
     slugOwners.set(scopedSlug, locationKey);
   }
 
-  return { comarques, locations, institutes, groups, warnings };
+  return { provinces, comarques, comarcaRecords, locations, institutes, groups, warnings };
 }
 
 async function upsertAndGetId(
   supabase: SupabaseClient,
-  table: "comarques" | "locations" | "institutes",
+  table: "provinces" | "comarques" | "locations" | "institutes",
   values: Record<string, unknown>,
   onConflict: string,
 ): Promise<number> {
@@ -267,30 +296,47 @@ async function importToSupabase(
   data: ImportData,
   supabaseUrl: string,
   serviceRoleKey: string,
+  replace: boolean,
 ): Promise<void> {
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
+  if (replace) {
+    for (const table of ["whatsapp_groups", "institutes", "locations", "comarques", "provinces"] as const) {
+      const { error } = await supabase.from(table).delete().gt("id", 0);
+      if (error) throw new Error(`${table} replace failed: ${error.message}`);
+    }
+  }
+
+  const provinceIds = new Map<string, number>();
   const comarcaIds = new Map<string, number>();
   const locationIds = new Map<string, number>();
   const instituteIds = new Map<string, number>();
 
-  for (const comarca of [...data.comarques.values()].sort((a, b) =>
+  for (const province of [...data.provinces.values()].sort((a, b) =>
     a.name.localeCompare(b.name, "ca"),
   )) {
+    const id = await upsertAndGetId(supabase, "provinces", province, "name");
+    provinceIds.set(province.name, id);
+  }
+
+  for (const [key, comarca] of [...data.comarcaRecords.entries()].sort((a, b) =>
+    a[1].name.localeCompare(b[1].name, "ca"),
+  )) {
+    const provinceId = provinceIds.get(comarca.provinceName)!;
     const id = await upsertAndGetId(
       supabase,
       "comarques",
-      comarca,
+      { name: comarca.name, province_id: provinceId, slug: comarca.slug },
       "name",
     );
-    comarcaIds.set(comarca.name, id);
+    comarcaIds.set(key, id);
   }
 
   for (const [key, location] of [...data.locations.entries()].sort((a, b) =>
     a[1].name.localeCompare(b[1].name, "ca"),
   )) {
-    const comarcaId = comarcaIds.get(location.comarcaName)!;
+    const comarcaId = comarcaIds.get(location.comarcaKey)!;
     const id = await upsertAndGetId(
       supabase,
       "locations",
@@ -314,14 +360,16 @@ async function importToSupabase(
   }
 
   for (const group of data.groups.values()) {
-    const locationId = locationIds.get(group.locationKey)!;
+    const comarcaId = comarcaIds.get(group.comarcaKey)!;
+    const locationId = group.locationKey ? locationIds.get(group.locationKey)! : null;
     const instituteId = group.instituteKey
       ? instituteIds.get(group.instituteKey)!
       : null;
     let query = supabase
       .from("whatsapp_groups")
       .select("id")
-      .eq("location_id", locationId);
+      .eq("comarca_id", comarcaId);
+    query = locationId ? query.eq("location_id", locationId) : query.is("location_id", null);
     query = instituteId
       ? query.eq("institute_id", instituteId)
       : query.is("institute_id", null);
@@ -338,6 +386,7 @@ async function importToSupabase(
       if (error) throw new Error(`whatsapp_groups update failed: ${error.message}`);
     } else {
       const { error } = await supabase.from("whatsapp_groups").insert({
+        comarca_id: comarcaId,
         location_id: locationId,
         institute_id: instituteId,
         whatsapp_url: group.whatsappUrl,
@@ -352,6 +401,7 @@ function printSummary(data: ImportData, dryRun: boolean): void {
   const withLink = groups.filter((group) => group.whatsappUrl !== null).length;
   const withoutLink = groups.length - withLink;
   console.log(dryRun ? "Dry run complete; no database writes." : "Import complete.");
+  console.log(`Provinces: ${data.provinces.size}`);
   console.log(`Comarques: ${data.comarques.size}`);
   console.log(`Locations: ${data.locations.size}`);
   console.log(`Institutes: ${data.institutes.size}`);
@@ -367,7 +417,7 @@ function printSummary(data: ImportData, dryRun: boolean): void {
 
 async function main(): Promise<void> {
   loadLocalEnvironment();
-  const { filePath, dryRun } = parseArgs();
+  const { filePath, dryRun, replace } = parseArgs();
   const data = await readImportData(filePath);
 
   if (!dryRun) {
@@ -378,7 +428,7 @@ async function main(): Promise<void> {
         "NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required unless --dry-run is used",
       );
     }
-    await importToSupabase(data, supabaseUrl, serviceRoleKey);
+    await importToSupabase(data, supabaseUrl, serviceRoleKey, replace);
   }
 
   printSummary(data, dryRun);
