@@ -34,7 +34,7 @@ a { color: inherit; text-decoration: none; }
 .brand-logo { display: block; width: auto; object-fit: contain; }
 .brand-logo--header { height: 2.7rem; }
 .brand-logo--footer { height: 2.6rem; }
-.brand-logo--experiences-header { height: 3.35rem; }
+.brand-logo--experiences-header { height: 3.1rem; }
 .partner-lockup {
   display: flex;
   width: fit-content;
@@ -47,6 +47,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.8rem;
   font-weight: 900;
   line-height: 0.8;
+  transform: translateY(-0.1rem);
 }
 .partner-lockup__neway {
   display: block;
@@ -521,13 +522,14 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.7rem;
   font-weight: 900;
   line-height: 0.8;
+  transform: translateY(-0.1rem);
 }
 .footer__brand-lockup .brand-logo--footer {
   width: auto;
   height: clamp(1.15rem, 4.5vw, 1.6rem);
 }
 .footer__brand-lockup .brand-logo--experiences-footer {
-  height: clamp(2rem, 6.5vw, 2.45rem);
+  height: clamp(2.8rem, 8.7vw, 3.4rem);
 }
 .footer__brand-lockup .footer__neway {
   width: 6.8rem;
@@ -602,7 +604,7 @@ a { color: inherit; text-decoration: none; }
   .topbar, .hero__copy { padding-inline: 5vw; }
   .brand-logo--header { height: 3.35rem; }
   .brand-logo--footer { height: 3rem; }
-  .brand-logo--experiences-header { height: 4.1rem; }
+  .brand-logo--experiences-header { height: 3.8rem; }
   .partner-lockup__neway { width: 8.8rem; }
   .hero { min-height: 44rem; }
   .hero h1 { max-width: 9ch; font-size: clamp(5.8rem, 9vw, 9rem); }
@@ -632,7 +634,7 @@ a { color: inherit; text-decoration: none; }
     gap: 3rem;
   }
   .footer__brand-lockup .brand-logo--footer { width: auto; height: 2.5rem; }
-  .footer__brand-lockup .brand-logo--experiences-footer { height: 2.65rem; }
+  .footer__brand-lockup .brand-logo--experiences-footer { height: 3.6rem; }
   .footer__brand-lockup .footer__neway { width: 9rem; height: auto; }
   .footer__title { font-size: 2.9rem; text-align: right; }
   .footer__meta-row { justify-content: flex-end; gap: 2rem; padding-top: 0.35rem; }

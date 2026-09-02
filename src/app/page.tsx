@@ -14,8 +14,8 @@ export default function ThirstyExperiencesPage() {
               className="brand-logo brand-logo--header brand-logo--experiences-header"
               src="/media/thirsty-experiences-logo.png"
               alt="Thirsty Experiences"
-              width={734}
-              height={352}
+              width={680}
+              height={219}
               priority
             />
             <span className="partner-lockup__cross" aria-hidden="true">×</span>
@@ -58,8 +58,8 @@ export default function ThirstyExperiencesPage() {
                 className="brand-logo brand-logo--footer brand-logo--experiences-footer"
                 src="/media/thirsty-experiences-logo.png"
                 alt="Thirsty Experiences"
-                width={734}
-                height={352}
+                width={680}
+                height={219}
               />
               <span aria-hidden="true">×</span>
               <Image
