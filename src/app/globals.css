@@ -34,7 +34,10 @@ a { color: inherit; text-decoration: none; }
 .brand-logo { display: block; width: auto; object-fit: contain; }
 .brand-logo--header { height: 2.7rem; }
 .brand-logo--footer { height: 2.6rem; }
-.brand-logo--experiences-header { height: 3.1rem; }
+.brand-logo--experiences-header {
+  height: 3.1rem;
+  margin-bottom: -0.22rem;
+}
 .partner-lockup {
   display: flex;
   width: fit-content;
@@ -47,7 +50,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.8rem;
   font-weight: 900;
   line-height: 0.8;
-  transform: translateY(-0.1rem);
+  transform: translateY(-0.3rem);
 }
 .partner-lockup__neway {
   display: block;
@@ -522,7 +525,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.7rem;
   font-weight: 900;
   line-height: 0.8;
-  transform: translateY(-0.1rem);
+  transform: translateY(-0.3rem);
 }
 .footer__brand-lockup .brand-logo--footer {
   width: auto;
@@ -530,6 +533,7 @@ a { color: inherit; text-decoration: none; }
 }
 .footer__brand-lockup .brand-logo--experiences-footer {
   height: clamp(2.8rem, 8.7vw, 3.4rem);
+  margin-bottom: -0.28rem;
 }
 .footer__brand-lockup .footer__neway {
   width: 6.8rem;
