@@ -55,7 +55,7 @@ function SocialIcon({ icon }: Pick<SocialLink, "icon">) {
   );
 }
 
-export function SocialLinks() {
+export function SocialLinks({ variant = "icons" }: { variant?: "icons" | "list" }) {
   const availableLinks = socialLinks.filter(
     (link): link is SocialLink & { href: string } => Boolean(link.href),
   );
@@ -63,7 +63,10 @@ export function SocialLinks() {
   if (availableLinks.length === 0) return null;
 
   return (
-    <nav className="social-links" aria-label="Xarxes socials de Thirsty">
+    <nav
+      className={variant === "list" ? "social-links social-links--list" : "social-links"}
+      aria-label="Xarxes socials de Thirsty"
+    >
       {availableLinks.map((link) => (
         <a
           href={link.href}
@@ -73,7 +76,16 @@ export function SocialLinks() {
           aria-label={link.label}
           title={link.label}
         >
-          <SocialIcon icon={link.icon} />
+          {variant === "list" ? (
+            <>
+              <span>{link.label}</span>
+              <svg className="social-links__arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
+            </>
+          ) : (
+            <SocialIcon icon={link.icon} />
+          )}
         </a>
       ))}
     </nav>

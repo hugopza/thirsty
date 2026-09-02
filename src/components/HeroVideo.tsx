@@ -5,7 +5,30 @@ import { useEffect, useRef } from "react";
 const FADE_DURATION = 650;
 const clampVolume = (value: number) => Math.min(1, Math.max(0, value));
 
-export function HeroVideo() {
+type VideoSource = {
+  src: string;
+  type: string;
+  media?: string;
+};
+
+type HeroVideoProps = {
+  className?: string;
+  poster?: string;
+  sources?: VideoSource[];
+  soundOnInteraction?: boolean;
+};
+
+const experienceSources: VideoSource[] = [
+  { src: "/media/menorca-experiencia-hero-mobile.mp4", media: "(max-width: 767px)", type: "video/mp4" },
+  { src: "/media/menorca-experiencia-hero-desktop.mp4", type: "video/mp4" },
+];
+
+export function HeroVideo({
+  className = "hero__video",
+  poster = "/media/viatge-estudiants-menorca-hero-poster.webp",
+  sources = experienceSources,
+  soundOnInteraction = true,
+}: HeroVideoProps = {}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const soundWasEnabled = useRef(false);
   const inViewport = useRef(true);
@@ -13,7 +36,7 @@ export function HeroVideo() {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !soundOnInteraction) return;
 
     const cancelFade = () => {
       if (frame.current !== null) cancelAnimationFrame(frame.current);
@@ -70,29 +93,23 @@ export function HeroVideo() {
       observer.disconnect();
       events.forEach((event) => document.removeEventListener(event, onFirstInteraction));
     };
-  }, []);
+  }, [soundOnInteraction]);
 
   return (
     <video
       ref={videoRef}
-      className="hero__video"
+      className={className}
       autoPlay
       muted
       loop
       playsInline
       preload="metadata"
-      poster="/media/viatge-estudiants-menorca-hero-poster.webp"
+      poster={poster}
       aria-hidden="true"
     >
-      <source
-        src="/media/menorca-experiencia-hero-mobile.mp4"
-        media="(max-width: 767px)"
-        type="video/mp4"
-      />
-      <source
-        src="/media/menorca-experiencia-hero-desktop.mp4"
-        type="video/mp4"
-      />
+      {sources.map((source) => (
+        <source key={source.src} src={source.src} media={source.media} type={source.type} />
+      ))}
     </video>
   );
 }

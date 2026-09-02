@@ -1,59 +1,207 @@
-import { ExperienceCollages } from "@/components/ExperienceCollages";
-import { GroupFinder } from "@/components/GroupFinder";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { HeroVideo } from "@/components/HeroVideo";
 import { SocialLinks } from "@/components/SocialLinks";
-import Image from "next/image";
+import { siteUrl } from "@/lib/site";
+import styles from "./home.module.css";
 
-export default function ThirstyExperiencesPage() {
+const instagramUrl = "https://www.instagram.com/thirsty.cb/";
+const socialImage = `${siteUrl}/media/thirsty-costa-brava-og.webp`;
+
+export const metadata: Metadata = {
+  title: { absolute: "Thirsty Costa Brava | Festes i experiències" },
+  description:
+    "Descobreix les festes de Thirsty Costa Brava, els últims moments i Thirsty Experiences, el viatge de final de curs a Menorca.",
+  alternates: { canonical: siteUrl },
+  openGraph: {
+    type: "website",
+    locale: "ca_ES",
+    url: siteUrl,
+    siteName: "Thirsty",
+    title: "Thirsty Costa Brava — Festes i experiències",
+    description: "Festes, records reals i experiències amb la teva gent a la Costa Brava i Menorca.",
+    images: [{ url: socialImage, width: 1200, height: 630, alt: "Ambient d'una festa Thirsty a la Costa Brava" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Thirsty Costa Brava | Festes i experiències",
+    description: "Festes, records reals i Thirsty Experiences.",
+    images: [socialImage],
+  },
+};
+
+const nextPartyUrl =
+  "https://site.fourvenues.com/es/thirsty-costa-brava1/events/resacon-en-las-vegas---closing-beout-by-thirsty-12-09-2026-2099";
+
+const archives = [
+  {
+    title: "Premiere",
+    images: [
+      ["/media/festa-thirsty-premiere.webp", "Amigues a la festa Premiere de Thirsty"],
+      ["/media/amics-thirsty-jacuzzi.webp", "Amics celebrant una nit Thirsty"],
+      ["/media/ambient-nocturn-thirsty.webp", "Ambient nocturn en una festa Thirsty"],
+    ],
+  },
+  {
+    title: "Barbie",
+    images: [
+      ["/media/festa-thirsty-barbie.webp", "Públic de la festa Barbie de Thirsty"],
+      ["/media/amigues-festa-thirsty.webp", "Dues amigues gaudint de Thirsty"],
+      ["/media/aniversari-thirsty.webp", "Celebració d'aniversari a Thirsty"],
+    ],
+  },
+];
+
+function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
-    <>
-      <header className="hero">
-        <div className="topbar" aria-label="Capçalera">
-          <div className="partner-lockup" aria-label="Thirsty en col·laboració amb Neway">
-            <Image
-              className="brand-logo brand-logo--header"
-              src="/media/thirsty-logo-transparent.webp"
-              alt="Thirsty"
-              width={800}
-              height={312}
-              priority
-            />
-            <span className="partner-lockup__cross" aria-hidden="true">×</span>
-            <Image
-              className="partner-lockup__neway"
-              src="/media/neway-logo-blanc.png"
-              alt="Neway"
-              width={1126}
-              height={146}
-              priority
-            />
-          </div>
-        </div>
-        <HeroVideo />
-        <div className="hero__shade" />
-        <div className="hero__copy">
-          <h1>El viatge de final de curs comença aquí.</h1>
-          <a className="hero__cta" href="#troba-el-teu-grup">
-            TROBAR EL MEU GRUP
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </a>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      {diagonal ? <path d="M7 17 17 7M8 7h9v9" /> : <path d="M5 12h14M13 6l6 6-6 6" />}
+    </svg>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <div className={styles.page}>
+      <header className={styles.hero}>
+        <HeroVideo
+          className={styles.heroVideo}
+          poster="/media/thirsty-home-hero-poster.webp"
+          sources={[{ src: "/media/thirsty-home-hero-mobile.mp4", type: "video/mp4" }]}
+          soundOnInteraction={false}
+        />
+        <div className={styles.heroShade} />
+        <nav className={styles.topbar} aria-label="Navegació principal">
+          <Link href="/" aria-label="Thirsty, inici">
+            <Image className={styles.logo} src="/media/thirsty-logo-transparent.webp" alt="Thirsty" width={800} height={312} priority />
+          </Link>
+        </nav>
+        <div className={styles.heroCopy}>
+          <h1>This is<br />Thirsty.</h1>
         </div>
       </header>
 
       <main>
-        <ExperienceCollages />
-        <section className="menorca-title" aria-labelledby="menorca-title">
-          <h2 id="menorca-title">Menorca</h2>
+        <section className={styles.experiencesDoor} aria-labelledby="experiences-title">
+          <div className={styles.experiencesInner}>
+            <h2 id="experiences-title">Thirsty<br />Experiences.</h2>
+            <div className={styles.experiencesRule} />
+            <Link className={styles.experiencesCard} href="/experiences">
+              <Image
+                className={styles.experiencesMainImage}
+                src="/media/cala-menorca-thirsty-experiences.webp"
+                alt="Cala de Menorca amb aigua turquesa i un veler"
+                fill
+                sizes="(min-width: 800px) 90vw, calc(100vw - 2rem)"
+              />
+              <div className={styles.experiencesShade} />
+              <div className={styles.experiencesPhotoStack}>
+                <div className={styles.experiencesSmallPhoto}>
+                  <Image
+                    src="/media/polsera-thirsty-cala-menorca.webp"
+                    alt="Polsera de viatge i adhesiu Thirsty en una cala de Menorca"
+                    fill
+                    sizes="(min-width: 800px) 26vw, 40vw"
+                  />
+                </div>
+                <div className={`${styles.experiencesSmallPhoto} ${styles.experiencesSmallPhotoOffset}`}>
+                  <Image
+                    src="/media/festa-thirsty-amics.webp"
+                    alt="Grup d'amics durant una festa Thirsty"
+                    fill
+                    sizes="(min-width: 800px) 21vw, 33vw"
+                  />
+                </div>
+              </div>
+              <div className={styles.experiencesBottom}>
+                <div className={styles.experiencesDestination}>
+                  Menorca &apos;26
+                  <small>Thirsty Experiences</small>
+                </div>
+                <span className={styles.experiencesArrow} aria-hidden="true">
+                  <Arrow diagonal />
+                </span>
+              </div>
+            </Link>
+          </div>
         </section>
-        <GroupFinder />
+
+        <section className={styles.lightSection} aria-labelledby="dates-title">
+          <div className={styles.sectionHead}>
+            <h2 id="dates-title">Pròximes<br />dates.</h2>
+          </div>
+          <div className={styles.eventTrack}>
+            <a
+              className={styles.event}
+              href={nextPartyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Comprar entrades per Resacón en Las Vegas, el 12 de setembre de 2026"
+            >
+              <span className={styles.eventPoster}>
+                <Image
+                  src="/media/festa-thirsty-resacon-las-vegas.webp"
+                  alt="Cartell de Resacón en Las Vegas, festa de tancament de Thirsty el 12 de setembre de 2026"
+                  fill
+                  sizes="(min-width: 800px) 31vw, 82vw"
+                />
+              </span>
+              <span className={styles.eventAction}>
+                Entrades
+                <Arrow diagonal />
+              </span>
+            </a>
+            <article className={styles.soon}>
+              <small>Coming soon</small>
+              <strong>Pròximes<br />festes.</strong>
+              <small>No spoilers.</small>
+            </article>
+          </div>
+        </section>
+
+        <section className={`${styles.lightSection} ${styles.stay}`} aria-labelledby="stay-title">
+          <div className={styles.sectionHead}>
+            <h2 id="stay-title">Stay<br />Thirsty.</h2>
+          </div>
+          <SocialLinks variant="list" />
+        </section>
+
+        <section className={styles.archives} aria-labelledby="archives-title">
+          <div className={styles.sectionHead}>
+            <h2 id="archives-title">Thirsty<br />Archives.</h2>
+          </div>
+          <div className={styles.albumTrack}>
+            {archives.map((album) => (
+              <a
+                className={styles.album}
+                href={instagramUrl}
+                key={album.title}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Veure l'àlbum ${album.title} a Instagram`}
+              >
+                <div className={styles.albumCollage}>
+                  {album.images.map(([src, alt]) => (
+                    <div className={styles.shot} key={src}>
+                      <Image src={src} alt={alt} fill sizes="(min-width: 800px) 21vw, 60vw" />
+                    </div>
+                  ))}
+                </div>
+                <h3>
+                  {album.title}
+                  <Arrow diagonal />
+                </h3>
+              </a>
+            ))}
+          </div>
+        </section>
       </main>
 
       <footer className="footer">
         <div className="footer__top">
           <div className="footer__brand-row">
-            <div className="footer__brand-lockup" aria-label="Thirsty i Neway">
+            <div className="footer__brand-lockup">
               <Image
                 className="brand-logo brand-logo--footer"
                 src="/media/thirsty-logo-transparent.webp"
@@ -61,31 +209,17 @@ export default function ThirstyExperiencesPage() {
                 width={800}
                 height={312}
               />
-              <span aria-hidden="true">×</span>
-              <Image
-                className="footer__neway"
-                src="/media/neway-logo-blanc.png"
-                alt="Neway"
-                width={1126}
-                height={146}
-              />
             </div>
-            <h2 className="footer__title">
-              See you
-              <br />
-              in Menorca.
-            </h2>
+            <h2 className="footer__title">See you<br />out there.</h2>
           </div>
-
           <div className="footer__meta-row">
             <div className="footer__description">
-              <p>Experiències de final de curs.</p>
+              <p>Festes i experiències.</p>
             </div>
             <SocialLinks />
           </div>
         </div>
-
       </footer>
-    </>
+    </div>
   );
 }

@@ -3,34 +3,38 @@ import type { ReactNode } from "react";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const socialImage = `${siteUrl}/media/thirsty-experiences-menorca-og.webp`;
+const socialImage = `${siteUrl}/media/thirsty-costa-brava-og.webp`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Thirsty Experiences - Viatge de final de curs",
+  title: {
+    default: "Thirsty Costa Brava | Festes i experiències",
+    template: "%s | Thirsty",
+  },
   description:
-    "Troba el grup de WhatsApp del teu institut i comença a organitzar el viatge de final de curs a Menorca amb els teus amics.",
+    "Thirsty Costa Brava: festes, dates, moments reals i experiències per viure amb la teva gent.",
   alternates: { canonical: siteUrl },
   openGraph: {
     type: "website",
     locale: "ca_ES",
     url: siteUrl,
-    title: "Thirsty Experiences — Viatge de final de curs a Menorca",
+    siteName: "Thirsty",
+    title: "Thirsty Costa Brava — Festes i experiències",
     description:
-      "Troba el grup de WhatsApp del teu institut per al vostre viatge a Menorca.",
+      "Festes, records reals i experiències amb la teva gent.",
     images: [
       {
         url: socialImage,
         width: 1200,
         height: 630,
-        alt: "Cala de Menorca durant un viatge de final de curs",
+        alt: "Ambient d'una festa Thirsty a la Costa Brava",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Viatge de final de curs a Menorca | Thirsty Experiences",
-    description: "Troba el grup de WhatsApp del teu institut per al vostre viatge a Menorca.",
+    title: "Thirsty Costa Brava | Festes i experiències",
+    description: "Festes, records reals i Thirsty Experiences.",
     images: [socialImage],
   },
   appleWebApp: {
