@@ -12,11 +12,12 @@ export default function ThirstyExperiencesPage() {
           <div className="partner-lockup" aria-label="Thirsty en col·laboració amb Neway">
             <Image
               className="brand-logo brand-logo--header brand-logo--experiences-header"
-              src="/media/thirsty-experiences-logo.png"
+              src="/media/thirsty-experiences-logo-v2.png"
               alt="Thirsty Experiences"
               width={680}
               height={219}
               priority
+              unoptimized
             />
             <span className="partner-lockup__cross" aria-hidden="true">×</span>
             <Image
@@ -56,10 +57,11 @@ export default function ThirstyExperiencesPage() {
             <div className="footer__brand-lockup" aria-label="Thirsty i Neway">
               <Image
                 className="brand-logo brand-logo--footer brand-logo--experiences-footer"
-                src="/media/thirsty-experiences-logo.png"
+                src="/media/thirsty-experiences-logo-v2.png"
                 alt="Thirsty Experiences"
                 width={680}
                 height={219}
+                unoptimized
               />
               <span aria-hidden="true">×</span>
               <Image
