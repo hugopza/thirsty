@@ -101,73 +101,147 @@
 }
 
 .experiencesDoor {
-  padding: 0.75rem;
+  padding: 4.5rem 1rem 5rem;
   background: var(--home-paper);
 }
 
-.experiencesCard {
-  position: relative;
-  display: flex;
-  min-height: 17rem;
-  align-items: flex-end;
-  overflow: hidden;
-  border-radius: 1rem;
-  background: var(--home-ink-soft);
-  color: #fff;
+.experiencesInner {
+  max-width: 70rem;
+  margin: 0 auto;
 }
 
-.experiencesVideo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 500ms ease;
-}
-
-.experiencesCard:hover .experiencesVideo {
-  transform: scale(1.025);
-}
-
-.experiencesShade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(7, 28, 37, 0.92), rgba(7, 28, 37, 0.12));
-}
-
-.experiencesCopy {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding: 1.1rem;
-}
-
-.experiencesCopy h2 {
+.experiencesInner h2 {
   margin: 0;
-  font-size: clamp(2.8rem, 12vw, 5.8rem);
+  font-size: clamp(3.4rem, 14vw, 6rem);
   line-height: 0.88;
   letter-spacing: -0.035em;
   text-transform: uppercase;
 }
 
-.experiencesLink {
+.experiencesRule {
+  height: 1px;
+  margin: 1.2rem 0 1rem;
+  background: rgba(13, 38, 48, 0.28);
+}
+
+.experiencesCard {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 27rem;
+  overflow: hidden;
+  border-radius: 1.1rem;
+  background: #d7e3e8;
+  color: #fff;
+  isolation: isolate;
+}
+
+.experiencesMainImage {
+  object-fit: cover;
+  object-position: center 62%;
+  transition: transform 500ms ease;
+}
+
+.experiencesShade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(6, 26, 35, 0.82), rgba(6, 26, 35, 0.03) 52%);
+}
+
+.experiencesPhotoStack {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 0.8rem;
+  width: 42%;
+}
+
+.experiencesSmallPhoto {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 4px solid var(--home-paper);
+  border-radius: 0.65rem;
+  box-shadow: 0 0.55rem 1.5rem rgba(8, 26, 34, 0.2);
+  transform: rotate(1.7deg);
+}
+
+.experiencesSmallPhoto img {
+  object-fit: cover;
+}
+
+.experiencesSmallPhotoOffset {
+  width: 82%;
+  margin-top: -1.75rem;
+  margin-left: -1.25rem;
+  transform: rotate(-2.2deg);
+}
+
+.experiencesBottom {
+  position: absolute;
+  z-index: 3;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  left: 1rem;
   display: flex;
-  margin-top: 1rem;
-  padding-top: 0.85rem;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  font-size: 0.68rem;
+}
+
+.experiencesDestination {
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 1.8rem;
   font-weight: 900;
-  letter-spacing: 0.07em;
-  line-height: 1.35;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
   text-transform: uppercase;
 }
 
-.experiencesLink span {
-  max-width: 29rem;
+.experiencesDestination small {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.experiencesArrow {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 3rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0.32rem 0 var(--home-cyan);
+  color: var(--home-ink);
+  transition: transform 160ms ease;
+}
+
+.experiencesArrow svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.experiencesCard:hover .experiencesMainImage,
+.experiencesCard:focus-visible .experiencesMainImage {
+  transform: scale(1.02);
+}
+
+.experiencesCard:hover .experiencesArrow,
+.experiencesCard:focus-visible .experiencesArrow {
+  transform: translate(0.14rem, -0.14rem);
+}
+
+.experiencesCard:focus-visible {
+  outline: 3px solid var(--home-cyan);
+  outline-offset: 3px;
 }
 
 .lightSection,
@@ -432,15 +506,31 @@
   }
 
   .experiencesDoor {
-    padding: 1rem 5vw;
+    padding: 7rem 5vw;
+  }
+
+  .experiencesInner h2 {
+    font-size: clamp(5rem, 8vw, 8rem);
   }
 
   .experiencesCard {
-    min-height: 22rem;
+    min-height: 35.5rem;
   }
 
-  .experiencesCopy {
-    padding: 1.6rem;
+  .experiencesPhotoStack {
+    top: 1.75rem;
+    right: 1.75rem;
+    width: 29%;
+  }
+
+  .experiencesBottom {
+    right: 1.6rem;
+    bottom: 1.5rem;
+    left: 1.6rem;
+  }
+
+  .experiencesDestination {
+    font-size: 2.6rem;
   }
 
   .lightSection,
@@ -494,7 +584,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .experiencesVideo,
+  .experiencesMainImage,
+  .experiencesArrow,
   .event,
   .eventAction svg,
   .album,

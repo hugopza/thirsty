@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { HeroVideo } from "@/components/HeroVideo";
-import { LazyLoopVideo } from "@/components/LazyLoopVideo";
 import { SocialLinks } from "@/components/SocialLinks";
 import { siteUrl } from "@/lib/site";
 import styles from "./home.module.css";
@@ -85,21 +84,47 @@ export default function HomePage() {
 
       <main>
         <section className={styles.experiencesDoor} aria-labelledby="experiences-title">
-          <Link className={styles.experiencesCard} href="/experiences">
-            <LazyLoopVideo
-              className={styles.experiencesVideo}
-              poster="/media/thirsty-aftermovie-menorca-poster.webp"
-              src="/media/thirsty-aftermovie-menorca-horizontal.mp4"
-            />
-            <div className={styles.experiencesShade} />
-            <div className={styles.experiencesCopy}>
-              <h2 id="experiences-title">Thirsty<br />Experiences.</h2>
-              <div className={styles.experiencesLink}>
-                <span>Menorca, la teva gent i una setmana per recordar</span>
-                <Arrow />
+          <div className={styles.experiencesInner}>
+            <h2 id="experiences-title">Thirsty<br />Experiences.</h2>
+            <div className={styles.experiencesRule} />
+            <Link className={styles.experiencesCard} href="/experiences">
+              <Image
+                className={styles.experiencesMainImage}
+                src="/media/cala-menorca-thirsty-experiences.webp"
+                alt="Cala de Menorca amb aigua turquesa i un veler"
+                fill
+                sizes="(min-width: 800px) 90vw, calc(100vw - 2rem)"
+              />
+              <div className={styles.experiencesShade} />
+              <div className={styles.experiencesPhotoStack}>
+                <div className={styles.experiencesSmallPhoto}>
+                  <Image
+                    src="/media/polsera-thirsty-cala-menorca.webp"
+                    alt="Polsera de viatge i adhesiu Thirsty en una cala de Menorca"
+                    fill
+                    sizes="(min-width: 800px) 26vw, 40vw"
+                  />
+                </div>
+                <div className={`${styles.experiencesSmallPhoto} ${styles.experiencesSmallPhotoOffset}`}>
+                  <Image
+                    src="/media/festa-thirsty-amics.webp"
+                    alt="Grup d'amics durant una festa Thirsty"
+                    fill
+                    sizes="(min-width: 800px) 21vw, 33vw"
+                  />
+                </div>
               </div>
-            </div>
-          </Link>
+              <div className={styles.experiencesBottom}>
+                <div className={styles.experiencesDestination}>
+                  Menorca &apos;26
+                  <small>Thirsty Experiences</small>
+                </div>
+                <span className={styles.experiencesArrow} aria-hidden="true">
+                  <Arrow diagonal />
+                </span>
+              </div>
+            </Link>
+          </div>
         </section>
 
         <section className={styles.lightSection} aria-labelledby="dates-title">
