@@ -128,7 +128,7 @@
   position: relative;
   display: block;
   width: 100%;
-  min-height: 27rem;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 1.1rem;
   background: #d7e3e8;
@@ -138,7 +138,7 @@
 
 .experiencesMainImage {
   object-fit: cover;
-  object-position: center 62%;
+  object-position: center;
   transition: transform 500ms ease;
 }
 
@@ -154,7 +154,7 @@
   z-index: 2;
   top: 1rem;
   right: 0.8rem;
-  width: 42%;
+  width: 33%;
 }
 
 .experiencesSmallPhoto {
@@ -192,23 +192,29 @@
 }
 
 .experiencesDestination {
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  align-items: center;
   font-family: Impact, "Arial Black", sans-serif;
   font-size: 1.8rem;
   font-weight: 900;
   line-height: 0.88;
   letter-spacing: -0.035em;
+  text-align: center;
   text-transform: uppercase;
 }
 
-.experiencesDestination small {
+.experiencesLogo {
   display: block;
-  margin-top: 0.5rem;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.6rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  text-transform: uppercase;
+  width: clamp(5.8rem, 25vw, 7.2rem);
+  height: auto;
+  filter: drop-shadow(0 0.18rem 0.4rem rgba(4, 15, 20, 0.45));
+}
+
+.experiencesDestination span {
+  display: block;
+  margin-top: 0.35rem;
 }
 
 .experiencesArrow {
@@ -514,13 +520,13 @@
   }
 
   .experiencesCard {
-    min-height: 35.5rem;
+    aspect-ratio: 16 / 9;
   }
 
   .experiencesPhotoStack {
     top: 1.75rem;
     right: 1.75rem;
-    width: 29%;
+    width: 24%;
   }
 
   .experiencesBottom {

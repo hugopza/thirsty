@@ -90,25 +90,26 @@ export default function HomePage() {
             <Link className={styles.experiencesCard} href="/experiences">
               <Image
                 className={styles.experiencesMainImage}
-                src="/media/cala-menorca-thirsty-experiences.webp"
-                alt="Cala de Menorca amb aigua turquesa i un veler"
+                src="/media/cala-en-brut-menorca-thirsty-experiences-v2.webp"
+                alt="Cala en Brut a Menorca amb joves banyant-se a l'aigua turquesa"
                 fill
                 sizes="(min-width: 800px) 90vw, calc(100vw - 2rem)"
+                quality={90}
               />
               <div className={styles.experiencesShade} />
               <div className={styles.experiencesPhotoStack}>
                 <div className={styles.experiencesSmallPhoto}>
                   <Image
-                    src="/media/polsera-thirsty-cala-menorca.webp"
-                    alt="Polsera de viatge i adhesiu Thirsty en una cala de Menorca"
+                    src="/media/amigues-festa-thirsty-menorca.webp"
+                    alt="Dues amigues gaudint d'una festa Thirsty a Menorca"
                     fill
                     sizes="(min-width: 800px) 26vw, 40vw"
                   />
                 </div>
                 <div className={`${styles.experiencesSmallPhoto} ${styles.experiencesSmallPhotoOffset}`}>
                   <Image
-                    src="/media/festa-thirsty-amics.webp"
-                    alt="Grup d'amics durant una festa Thirsty"
+                    src="/media/amigues-festa-thirsty-bengales.webp"
+                    alt="Dues amigues celebrant una nit Thirsty amb bengales"
                     fill
                     sizes="(min-width: 800px) 21vw, 33vw"
                   />
@@ -116,8 +117,15 @@ export default function HomePage() {
               </div>
               <div className={styles.experiencesBottom}>
                 <div className={styles.experiencesDestination}>
-                  Menorca &apos;26
-                  <small>Thirsty Experiences</small>
+                  <Image
+                    className={styles.experiencesLogo}
+                    src="/media/thirsty-experiences-logo-v2.png"
+                    alt="Thirsty Experiences"
+                    width={680}
+                    height={219}
+                    unoptimized
+                  />
+                  <span>Menorca &apos;26</span>
                 </div>
                 <span className={styles.experiencesArrow} aria-hidden="true">
                   <Arrow diagonal />
