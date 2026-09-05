@@ -457,7 +457,8 @@
 }
 
 .shot img {
-  object-fit: cover;
+  object-fit: contain;
+  background: var(--home-ink-soft);
 }
 
 .album h3 {
