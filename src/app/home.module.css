@@ -435,6 +435,16 @@
   gap: 0.4rem;
 }
 
+.albumVariant1 .albumCollage { grid-template-columns: 0.8fr 1.2fr; grid-template-rows: 1.25fr 0.75fr; }
+.albumVariant1 .shot:first-child { grid-row: 1; grid-column: 1 / 3; }
+.albumVariant1 .shot:last-child { grid-column: 2; }
+.albumVariant2 .albumCollage { grid-template-columns: 1fr 1fr; grid-template-rows: 0.75fr 1.25fr; }
+.albumVariant2 .shot:first-child { grid-row: 1 / 3; }
+.albumVariant3 .albumCollage { grid-template-columns: 1.35fr 0.65fr; grid-template-rows: 0.6fr 1.4fr; }
+.albumVariant3 .shot:first-child { grid-column: 1 / 3; grid-row: 1; }
+.albumVariant4 .albumCollage { grid-template-columns: 0.65fr 1.35fr; grid-template-rows: 1fr 1fr; }
+.albumVariant4 .shot:first-child { grid-column: 2; grid-row: 1 / 3; }
+
 .shot {
   position: relative;
   overflow: hidden;

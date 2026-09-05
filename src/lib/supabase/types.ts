@@ -66,6 +66,30 @@ export type Database = {
           phone: string;
         }
       >;
+      albums: Table<
+        {
+          id: string;
+          name: string;
+          slug: string;
+          season: string;
+          date: string;
+          cloudinary_folder: string;
+          cover_public_id: string | null;
+          seo_title: string | null;
+          seo_description: string | null;
+        },
+        {
+          id?: string;
+          name: string;
+          slug: string;
+          season: string;
+          date: string;
+          cloudinary_folder: string;
+          cover_public_id?: string | null;
+          seo_title?: string | null;
+          seo_description?: string | null;
+        }
+      >;
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
