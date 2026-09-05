@@ -4,9 +4,10 @@ import Link from "next/link";
 import { HeroVideo } from "@/components/HeroVideo";
 import { SocialLinks } from "@/components/SocialLinks";
 import { siteUrl } from "@/lib/site";
+import { getAlbums } from "@/lib/albums";
+import { getCloudinaryFolder, cloudinaryUrl } from "@/lib/cloudinary";
 import styles from "./home.module.css";
 
-const instagramUrl = "https://www.instagram.com/thirsty.cb/";
 const socialImage = `${siteUrl}/media/thirsty-costa-brava-og.webp`;
 
 export const metadata: Metadata = {
@@ -34,25 +35,6 @@ export const metadata: Metadata = {
 const nextPartyUrl =
   "https://site.fourvenues.com/es/thirsty-costa-brava1/events/resacon-en-las-vegas---closing-beout-by-thirsty-12-09-2026-2099";
 
-const archives = [
-  {
-    title: "Premiere",
-    images: [
-      ["/media/festa-thirsty-premiere.webp", "Amigues a la festa Premiere de Thirsty"],
-      ["/media/amics-thirsty-jacuzzi.webp", "Amics celebrant una nit Thirsty"],
-      ["/media/ambient-nocturn-thirsty.webp", "Ambient nocturn en una festa Thirsty"],
-    ],
-  },
-  {
-    title: "Barbie",
-    images: [
-      ["/media/festa-thirsty-barbie.webp", "Públic de la festa Barbie de Thirsty"],
-      ["/media/amigues-festa-thirsty.webp", "Dues amigues gaudint de Thirsty"],
-      ["/media/aniversari-thirsty.webp", "Celebració d'aniversari a Thirsty"],
-    ],
-  },
-];
-
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -61,7 +43,20 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  const albums = await getAlbums().catch(() => []);
+  const archives = await Promise.all(albums.map(async (album, albumIndex) => {
+    const photos = await getCloudinaryFolder(album.cloudinary_folder).catch(() => []);
+    const featured = album.featured_public_ids?.map((id) => {
+      const normalizedId = id.replace(/^.*\//, "");
+      return photos.find((photo) => photo.public_id === id || photo.public_id === normalizedId || photo.public_id.endsWith(`/${normalizedId}`));
+    }).filter((photo): photo is (typeof photos)[number] => Boolean(photo)) ?? [];
+    const selected = [...featured, ...photos.filter((photo) => !featured.some((item) => item.public_id === photo.public_id))].slice(0, 3);
+    return { album, images: selected.map((photo) => ({
+      src: cloudinaryUrl(photo.public_id, photo.format, `f_auto,q_auto,w_${albumIndex % 2 === 0 ? 900 : 760}`),
+      alt: `Foto de ${album.name} de Thirsty Costa Brava`,
+    })) };
+  }));
   return (
     <div className={styles.page}>
       <header className={styles.hero}>
@@ -180,24 +175,22 @@ export default function HomePage() {
             <h2 id="archives-title">Thirsty<br />Archives.</h2>
           </div>
           <div className={styles.albumTrack}>
-            {archives.map((album) => (
+            {archives.map(({ album, images }, albumIndex) => (
               <a
-                className={styles.album}
-                href={instagramUrl}
-                key={album.title}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Veure l'àlbum ${album.title} a Instagram`}
+                className={`${styles.album} ${styles[`albumVariant${albumIndex % 5}`]}`}
+                href={`/fotos/${album.season}/${album.slug}`}
+                key={album.id}
+                aria-label={`Veure l'àlbum ${album.name}`}
               >
                 <div className={styles.albumCollage}>
-                  {album.images.map(([src, alt]) => (
+                  {images.map(({ src, alt }) => (
                     <div className={styles.shot} key={src}>
                       <Image src={src} alt={alt} fill sizes="(min-width: 800px) 21vw, 60vw" />
                     </div>
                   ))}
                 </div>
                 <h3>
-                  {album.title}
+                  {album.name}
                   <Arrow diagonal />
                 </h3>
               </a>
