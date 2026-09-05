@@ -53,5 +53,5 @@ export function cloudinaryUrl(publicId: string, format?: string, transform = "f_
 }
 
 export function cloudinaryDownloadUrl(photo: CloudinaryPhoto) {
-  return cloudinaryUrl(photo.public_id, photo.format, "fl_attachment,q_auto");
+  return cloudinaryUrl(photo.public_id, "jpg", "fl_attachment,f_jpg,q_95");
 }
