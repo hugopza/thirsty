@@ -47,7 +47,10 @@ export default async function HomePage() {
   const albums = await getAlbums().catch(() => []);
   const archives = await Promise.all(albums.map(async (album, albumIndex) => {
     const photos = await getCloudinaryFolder(album.cloudinary_folder).catch(() => []);
-    const featured = album.featured_public_ids?.map((id) => photos.find((photo) => photo.public_id === id)).filter((photo): photo is (typeof photos)[number] => Boolean(photo)) ?? [];
+    const featured = album.featured_public_ids?.map((id) => {
+      const normalizedId = id.replace(/^.*\//, "");
+      return photos.find((photo) => photo.public_id === id || photo.public_id === normalizedId || photo.public_id.endsWith(`/${normalizedId}`));
+    }).filter((photo): photo is (typeof photos)[number] => Boolean(photo)) ?? [];
     const selected = [...featured, ...photos.filter((photo) => !featured.some((item) => item.public_id === photo.public_id))].slice(0, 3);
     return { album, images: selected.map((photo) => ({
       src: cloudinaryUrl(photo.public_id, photo.format, `f_auto,q_auto,w_${albumIndex % 2 === 0 ? 900 : 760}`),
