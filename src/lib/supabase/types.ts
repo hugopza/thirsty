@@ -77,6 +77,7 @@ export type Database = {
           cover_public_id: string | null;
           seo_title: string | null;
           seo_description: string | null;
+          featured_public_ids: string[] | null;
         },
         {
           id?: string;
@@ -88,6 +89,7 @@ export type Database = {
           cover_public_id?: string | null;
           seo_title?: string | null;
           seo_description?: string | null;
+          featured_public_ids?: string[] | null;
         }
       >;
     };
