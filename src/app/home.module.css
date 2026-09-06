@@ -306,13 +306,13 @@
 .event {
   position: relative;
   display: flex;
-  min-height: 25rem;
+  min-height: 0;
   flex: 0 0 82%;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(13, 38, 48, 0.24);
+  border: 0;
   border-radius: 1rem;
-  background: var(--home-ink);
+  background: transparent;
   color: #fff;
   scroll-snap-align: start;
   transition: border-color 160ms ease, transform 160ms ease;
@@ -324,6 +324,7 @@
   width: 100%;
   aspect-ratio: 1122 / 1402;
   overflow: hidden;
+  border-radius: 1rem;
 }
 
 .eventPoster img {
