@@ -171,7 +171,7 @@ export default async function HomePage() {
           <SocialLinks variant="list" />
         </section>
 
-        <section className={styles.archives} aria-labelledby="archives-title">
+        <section id="archives" className={styles.archives} aria-labelledby="archives-title">
           <div className={styles.sectionHead}>
             <h2 id="archives-title">Thirsty<br />Archives.</h2>
           </div>
