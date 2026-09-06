@@ -52,10 +52,11 @@ export default async function HomePage() {
       return photos.find((photo) => photo.public_id === id || photo.public_id === normalizedId || photo.public_id.endsWith(`/${normalizedId}`));
     }).filter((photo): photo is (typeof photos)[number] => Boolean(photo)) ?? [];
     const selected = [...featured, ...photos.filter((photo) => !featured.some((item) => item.public_id === photo.public_id))].slice(0, 3);
-    return { album, images: selected.map((photo) => ({
+    const images = selected.map((photo) => ({
       src: cloudinaryUrl(photo.public_id, photo.format, `f_auto,q_auto,w_${albumIndex % 2 === 0 ? 900 : 760}`),
       alt: `Foto de ${album.name} de Thirsty Costa Brava`,
-    })) };
+    }));
+    return { album, images };
   }));
   return (
     <div className={styles.page}>
