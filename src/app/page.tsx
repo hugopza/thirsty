@@ -144,7 +144,7 @@ export default async function HomePage() {
             >
               <span className={styles.eventPoster}>
                 <Image
-                  src="/media/festa-thirsty-resacon-las-vegas.webp"
+                  src="/media/festa-thirsty-resacon-las-vegas.jpg"
                   alt="Cartell de Resacón en Las Vegas, festa de tancament de Thirsty el 12 de setembre de 2026"
                   fill
                   unoptimized
