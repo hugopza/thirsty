@@ -175,9 +175,9 @@ export default async function HomePage() {
             <h2 id="archives-title">Thirsty<br />Archives.</h2>
           </div>
           <div className={styles.albumTrack}>
-            {archives.map(({ album, images }, albumIndex) => (
+            {archives.map(({ album, images }) => (
               <a
-                className={`${styles.album} ${styles[`albumVariant${albumIndex % 5}`]}`}
+                className={`${styles.album} ${styles[`albumVariant${album.name === "Barbie" || album.name === "Hollywood Premiere" ? 1 : 0}`]}`}
                 href={`/fotos/${album.season}/${album.slug}`}
                 key={album.id}
                 aria-label={`Veure l'àlbum ${album.name}`}
