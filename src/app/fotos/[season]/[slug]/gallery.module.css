@@ -1,7 +1,7 @@
 .page { min-height:100svh; background:var(--paper); color:var(--ink); padding:1.25rem .75rem 3rem; }
-.header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin:0 .25rem 1.25rem; }
+.header { display:block; margin:0 .25rem 1.25rem; }
 .header h1 { margin:0; font-family:Impact,"Arial Black",sans-serif; font-size:clamp(2.6rem,12vw,6rem); line-height:.9; text-transform:uppercase; }
-.back { display:inline-flex; align-items:center; gap:.25rem; font-size:.75rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
+.back { display:inline-flex; align-items:center; gap:.35rem; margin-bottom:.9rem; font-size:.75rem; font-weight:900; letter-spacing:.08em; text-transform:uppercase; }
 .back svg { width:1.2rem; height:1.2rem; fill:none; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round; stroke-width:2; }
 .back .homeIcon { width:1.05rem; height:1.05rem; fill:currentColor; stroke:none; }
 .grid { column-count:3; column-gap:.45rem; }
