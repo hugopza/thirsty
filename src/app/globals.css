@@ -573,6 +573,21 @@ a { color: inherit; text-decoration: none; }
   stroke-width: 1.8;
 }
 .social-links__dot { fill: currentColor; stroke: none; }
+.social-links__instagram { fill: currentColor !important; stroke: none !important; }
+.social-links__tiktok { fill: currentColor !important; stroke: none !important; }
+.social-links__whatsapp { fill: currentColor !important; stroke: none !important; }
+
+.footer .social-links a,
+.footer .social-links a:hover,
+.footer .social-links a:focus-visible {
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  outline: none;
+}
+
 .social-links--list {
   display: block;
   border-top: 1px solid rgba(21, 43, 52, 0.24);

@@ -170,9 +170,9 @@ export default function HomePage() {
 
         <section className={`${styles.lightSection} ${styles.stay}`} aria-labelledby="stay-title">
           <div className={styles.sectionHead}>
-            <h2 id="stay-title">Stay<br />Thirsty.</h2>
+            <h2 id="stay-title">Stay Thirsty.</h2>
           </div>
-          <SocialLinks variant="list" />
+          <SocialLinks />
         </section>
 
         <section className={styles.archives} aria-labelledby="archives-title">

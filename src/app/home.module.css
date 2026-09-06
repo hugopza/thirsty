@@ -400,7 +400,51 @@
 }
 
 .stay {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
   padding-top: 1.25rem;
+}
+
+.stay .sectionHead {
+  margin-bottom: 0;
+}
+
+.stay .sectionHead h2 {
+  white-space: nowrap;
+  font-size: clamp(2.6rem, 13vw, 6rem);
+}
+
+.stay :global(.social-links) {
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.stay :global(.social-links a) {
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--home-cyan);
+}
+
+.stay :global(.social-links svg) {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+.stay :global(.social-links a:hover),
+.stay :global(.social-links a:focus-visible) {
+  border: 0;
+  background: transparent;
+  color: var(--home-cyan);
+  outline: none;
+  box-shadow: none;
 }
 
 .archives {
@@ -576,10 +620,9 @@
   }
 
   .stay {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    align-items: end;
-    gap: 6vw;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
     padding-top: 3rem;
   }
 
