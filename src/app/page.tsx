@@ -162,10 +162,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className={`${styles.lightSection} ${styles.stay}`} aria-labelledby="stay-title">
-          <div className={styles.sectionHead}>
-            <h2 id="stay-title">Stay Thirsty.</h2>
-          </div>
+        <section className={`${styles.lightSection} ${styles.stay}`} aria-label="Xarxes socials de Thirsty">
           <SocialLinks />
         </section>
 

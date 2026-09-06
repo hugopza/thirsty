@@ -381,16 +381,8 @@
   flex-direction: column;
   align-items: center;
   gap: 1.15rem;
-  padding-top: 1.25rem;
-}
-
-.stay .sectionHead {
-  margin-bottom: 0;
-}
-
-.stay .sectionHead h2 {
-  white-space: nowrap;
-  font-size: clamp(2.6rem, 13vw, 6rem);
+  padding: 2rem 1rem;
+  border-top: 1px solid rgba(13, 38, 48, 0.18);
 }
 
 .stay :global(.social-links) {
@@ -597,11 +589,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    padding-top: 3rem;
-  }
-
-  .stay .sectionHead {
-    margin-bottom: 0;
+    padding: 2.5rem 5vw;
   }
 
 }
