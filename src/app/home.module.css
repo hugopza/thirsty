@@ -118,16 +118,11 @@
   text-transform: uppercase;
 }
 
-.experiencesRule {
-  height: 1px;
-  margin: 1.2rem 0 1rem;
-  background: rgba(13, 38, 48, 0.28);
-}
-
 .experiencesCard {
   position: relative;
   display: block;
   width: 100%;
+  margin-top: 1.2rem;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 1.1rem;
@@ -175,7 +170,7 @@
 .experiencesSmallPhotoOffset {
   width: 82%;
   margin-top: -1.75rem;
-  margin-left: -1.25rem;
+  margin-left: -1.9rem;
   transform: rotate(-2.2deg);
 }
 
@@ -259,6 +254,14 @@
   background: var(--home-paper);
 }
 
+.datesSection {
+  border-top: 1px solid rgba(13, 38, 48, 0.18);
+}
+
+.datesSection .eventTrack {
+  justify-content: center;
+}
+
 .sectionHead {
   display: flex;
   margin-bottom: 1.6rem;
@@ -333,18 +336,17 @@
   right: 0.75rem;
   bottom: 0.75rem;
   display: flex;
-  min-height: 3rem;
-  padding: 0.7rem 0.85rem;
+  min-height: 2.2rem;
+  padding: 0.32rem 0.4rem 0.32rem 0.6rem;
   align-items: center;
   justify-content: space-between;
   gap: 0.65rem;
-  border: 1px solid rgba(255, 255, 255, 0.52);
+  border: 0;
   border-radius: 999px;
-  background: rgba(7, 28, 37, 0.78);
-  box-shadow: 0 0.5rem 1.5rem rgba(5, 17, 23, 0.28);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  font-size: 0.72rem;
+  background: #fff;
+  box-shadow: 0 0.3rem 0 var(--home-cyan), 0 0.55rem 1.25rem rgba(5, 17, 23, 0.2);
+  color: var(--home-ink);
+  font-size: 0.54rem;
   font-weight: 900;
   letter-spacing: 0.075em;
   text-transform: uppercase;
@@ -370,33 +372,6 @@
 .event:hover .eventAction svg,
 .event:focus-visible .eventAction svg {
   transform: translate(0.12rem, -0.12rem);
-}
-
-.soon small {
-  font-size: 0.58rem;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.soon {
-  display: flex;
-  min-height: 25rem;
-  flex: 0 0 64%;
-  padding: 1.1rem;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 1rem;
-  background: var(--home-ink-soft);
-  color: #fff;
-  scroll-snap-align: start;
-}
-
-.soon strong {
-  font-size: 2.45rem;
-  line-height: 0.88;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
 }
 
 .stay {
@@ -448,27 +423,26 @@
 }
 
 .archives {
-  background: var(--home-ink);
-  color: #fff;
+  background: var(--home-paper);
+  color: var(--home-ink);
+  border-top: 1px solid rgba(13, 38, 48, 0.18);
 }
 
 .archives .sectionHead p {
-  color: #b9c8ce;
+  color: #68777d;
 }
 
 .album {
   flex: 0 0 88%;
   padding: 0.55rem;
-  border: 1px solid rgba(255, 255, 255, 0.34);
+  border: 0;
   border-radius: 1rem;
   scroll-snap-align: start;
   transition: border-color 160ms ease, background-color 160ms ease;
 }
 
-.album:hover,
-.album:focus-visible {
-  border-color: var(--home-cyan);
-  background: rgba(89, 199, 239, 0.08);
+.archives .album h3 {
+  border-top: 1px solid rgba(13, 38, 48, 0.22);
 }
 
 .albumCollage {
@@ -497,19 +471,23 @@
 .album h3 {
   display: flex;
   margin: 0.8rem 0 0;
-  padding-top: 0.75rem;
+  padding: 0.75rem 0 0;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.28);
   font-size: 1.55rem;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .album h3 svg {
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1.45rem;
+  height: 1.45rem;
+  padding: 0.42rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0.3rem 0 var(--home-cyan);
+  color: var(--home-ink);
   transition: transform 160ms ease;
 }
 
@@ -605,10 +583,6 @@
 
   .event {
     flex-basis: 31%;
-  }
-
-  .soon {
-    flex-basis: 24%;
   }
 
   .album {

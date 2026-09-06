@@ -86,7 +86,6 @@ export default function HomePage() {
         <section className={styles.experiencesDoor} aria-labelledby="experiences-title">
           <div className={styles.experiencesInner}>
             <h2 id="experiences-title">Thirsty<br />Experiences.</h2>
-            <div className={styles.experiencesRule} />
             <Link className={styles.experiencesCard} href="/experiences">
               <Image
                 className={styles.experiencesMainImage}
@@ -135,7 +134,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className={styles.lightSection} aria-labelledby="dates-title">
+        <section className={`${styles.lightSection} ${styles.datesSection}`} aria-labelledby="dates-title">
           <div className={styles.sectionHead}>
             <h2 id="dates-title">Pròximes<br />dates.</h2>
           </div>
@@ -160,11 +159,6 @@ export default function HomePage() {
                 <Arrow diagonal />
               </span>
             </a>
-            <article className={styles.soon}>
-              <small>Coming soon</small>
-              <strong>Pròximes<br />festes.</strong>
-              <small>No spoilers.</small>
-            </article>
           </div>
         </section>
 
