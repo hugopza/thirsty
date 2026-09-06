@@ -52,6 +52,14 @@ export function cloudinaryUrl(publicId: string, format?: string, transform = "f_
   return `https://res.cloudinary.com/${cloudName}/image/upload/${transform}/${publicId}${format ? `.${format}` : ""}`;
 }
 
+export function cloudinaryGridUrl(photo: Pick<CloudinaryPhoto, "public_id" | "format">) {
+  return cloudinaryUrl(photo.public_id, undefined, "f_auto,q_auto:good,w_900");
+}
+
+export function cloudinaryLightboxUrl(photo: Pick<CloudinaryPhoto, "public_id" | "format">) {
+  return cloudinaryUrl(photo.public_id, undefined, "f_auto,q_90,w_1800");
+}
+
 export function cloudinaryDownloadUrl(photo: CloudinaryPhoto) {
   return cloudinaryUrl(photo.public_id, "jpg", "fl_attachment,f_jpg,q_95");
 }
