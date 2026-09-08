@@ -1,0 +1,617 @@
+.page {
+  --home-ink: #0d2630;
+  --home-ink-soft: #143845;
+  --home-paper: #f5f5f2;
+  --home-cyan: #59c7ef;
+  min-height: 100%;
+  overflow: hidden;
+  background: var(--home-paper);
+  color: var(--home-ink);
+}
+
+.page h1,
+.page h2,
+.page h3,
+.page strong {
+  font-family: Impact, "Arial Black", sans-serif;
+}
+
+.page svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--home-ink);
+  color: #fff;
+}
+
+.heroVideo,
+.heroShade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroVideo {
+  display: block;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.heroShade {
+  background: linear-gradient(180deg, rgba(5, 17, 23, 0.34), rgba(5, 17, 23, 0.04) 42%, rgba(5, 17, 23, 0.94));
+}
+
+.topbar {
+  position: absolute;
+  z-index: 3;
+  inset: 0 0 auto;
+  display: flex;
+  min-height: calc(5rem + env(safe-area-inset-top));
+  align-items: flex-start;
+  gap: 1rem;
+  padding: max(0.85rem, env(safe-area-inset-top)) 1rem 0;
+}
+
+.logo {
+  display: block;
+  width: 8.25rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 1rem max(2.5rem, calc(1.5rem + env(safe-area-inset-bottom)));
+}
+
+.heroCopy h1 {
+  max-width: 7ch;
+  margin: 0;
+  font-size: clamp(4.25rem, 18.5vw, 7rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.heroCopy p {
+  max-width: 21rem;
+  margin: 1.1rem 0 0;
+  color: #e4edf0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.experiencesDoor {
+  padding: 4.5rem 1rem 5rem;
+  background: var(--home-paper);
+}
+
+.experiencesInner {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.experiencesInner h2 {
+  margin: 0;
+  font-size: clamp(3.4rem, 14vw, 6rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.experiencesCard {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 1.2rem;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1.1rem;
+  background: #d7e3e8;
+  color: #fff;
+  isolation: isolate;
+}
+
+.experiencesMainImage {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 500ms ease;
+}
+
+.experiencesShade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(6, 26, 35, 0.82), rgba(6, 26, 35, 0.03) 52%);
+}
+
+.experiencesPhotoStack {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 0.8rem;
+  width: 33%;
+}
+
+.experiencesSmallPhoto {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 4px solid var(--home-paper);
+  border-radius: 0.65rem;
+  box-shadow: 0 0.55rem 1.5rem rgba(8, 26, 34, 0.2);
+  transform: rotate(1.7deg);
+}
+
+.experiencesSmallPhoto img {
+  object-fit: cover;
+}
+
+.experiencesSmallPhotoOffset {
+  width: 82%;
+  margin-top: -1.75rem;
+  margin-left: -1.9rem;
+  transform: rotate(-2.2deg);
+}
+
+.experiencesBottom {
+  position: absolute;
+  z-index: 3;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  left: 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.experiencesDestination {
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  align-items: center;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.experiencesLogo {
+  display: block;
+  width: clamp(5.8rem, 25vw, 7.2rem);
+  height: auto;
+  filter: drop-shadow(0 0.18rem 0.4rem rgba(4, 15, 20, 0.45));
+}
+
+.experiencesDestination span {
+  display: block;
+  margin-top: 0.35rem;
+}
+
+.experiencesArrow {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 3rem;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0.32rem 0 var(--home-cyan);
+  color: var(--home-ink);
+  transition: transform 160ms ease;
+}
+
+.experiencesArrow svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.experiencesCard:hover .experiencesMainImage,
+.experiencesCard:focus-visible .experiencesMainImage {
+  transform: scale(1.02);
+}
+
+.experiencesCard:hover .experiencesArrow,
+.experiencesCard:focus-visible .experiencesArrow {
+  transform: translate(0.14rem, -0.14rem);
+}
+
+.experiencesCard:focus-visible {
+  outline: 3px solid var(--home-cyan);
+  outline-offset: 3px;
+}
+
+.lightSection,
+.archives {
+  padding: 4.25rem 1rem;
+}
+
+.lightSection {
+  background: var(--home-paper);
+}
+
+.datesSection {
+  border-top: 1px solid rgba(13, 38, 48, 0.18);
+}
+
+.datesSection .eventTrack {
+  justify-content: center;
+}
+
+.sectionHead {
+  display: flex;
+  margin-bottom: 1.6rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sectionHead h2 {
+  margin: 0;
+  font-size: clamp(3rem, 13vw, 6rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.sectionHead p {
+  max-width: 9.5rem;
+  margin: 0;
+  color: #68777d;
+  font-size: 0.73rem;
+  line-height: 1.45;
+}
+
+.eventTrack,
+.albumTrack {
+  display: flex;
+  margin-right: -1rem;
+  padding-right: 1rem;
+  gap: 0.7rem;
+  overflow-x: auto;
+  scroll-padding-inline: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.eventTrack::-webkit-scrollbar,
+.albumTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.event {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  flex: 0 0 82%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0;
+  border-radius: 1rem;
+  background: transparent;
+  color: #fff;
+  scroll-snap-align: start;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.eventPoster {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1122 / 1402;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.eventPoster img {
+  object-fit: cover;
+}
+
+.eventAction {
+  position: absolute;
+  z-index: 2;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  min-height: 2.2rem;
+  padding: 0.32rem 0.4rem 0.32rem 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0.3rem 0 var(--home-cyan), 0 0.55rem 1.25rem rgba(5, 17, 23, 0.2);
+  color: var(--home-ink);
+  font-size: 0.54rem;
+  font-weight: 900;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.eventAction svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  transition: transform 160ms ease;
+}
+
+.event:hover,
+.event:focus-visible {
+  border-color: var(--home-cyan);
+  transform: translateY(-0.18rem);
+}
+
+.event:focus-visible {
+  outline: 3px solid var(--home-cyan);
+  outline-offset: 3px;
+}
+
+.event:hover .eventAction svg,
+.event:focus-visible .eventAction svg {
+  transform: translate(0.12rem, -0.12rem);
+}
+
+.stay {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid rgba(13, 38, 48, 0.18);
+}
+
+.stay :global(.social-links) {
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.stay :global(.social-links a) {
+  width: 4.4rem;
+  height: 4.4rem;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--home-cyan);
+}
+
+.stay :global(.social-links svg) {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+.stay :global(.social-links a:hover),
+.stay :global(.social-links a:focus-visible) {
+  border: 0;
+  background: transparent;
+  color: var(--home-cyan);
+  outline: none;
+  box-shadow: none;
+}
+
+.archives {
+  background: var(--home-paper);
+  color: var(--home-ink);
+  border-top: 1px solid rgba(13, 38, 48, 0.18);
+}
+
+.archives .sectionHead p {
+  color: #68777d;
+}
+
+.album {
+  flex: 0 0 88%;
+  padding: 0.55rem;
+  border: 0;
+  border-radius: 1rem;
+  scroll-snap-align: start;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.archives .album h3 {
+  border-top: 1px solid rgba(13, 38, 48, 0.22);
+}
+
+.albumCollage {
+  display: grid;
+  height: 25rem;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.4rem;
+}
+
+.albumVariant1 .albumCollage { grid-template-columns: 0.8fr 1.2fr; grid-template-rows: 1.25fr 0.75fr; }
+.albumVariant1 .shot:first-child { grid-row: 1; grid-column: 1 / 3; }
+.albumVariant1 .shot:last-child { grid-column: 2; }
+.albumVariant2 .albumCollage { grid-template-columns: 1fr 1fr; grid-template-rows: 0.75fr 1.25fr; }
+.albumVariant2 .shot:first-child { grid-row: 1 / 3; }
+.albumVariant3 .albumCollage { grid-template-columns: 1.35fr 0.65fr; grid-template-rows: 0.6fr 1.4fr; }
+.albumVariant3 .shot:first-child { grid-column: 1 / 3; grid-row: 1; }
+.albumVariant4 .albumCollage { grid-template-columns: 0.65fr 1.35fr; grid-template-rows: 1fr 1fr; }
+.albumVariant4 .shot:first-child { grid-column: 2; grid-row: 1 / 3; }
+
+.shot {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--home-ink-soft);
+}
+
+.shot:first-child {
+  grid-row: 1 / 3;
+}
+
+.shot img {
+  object-fit: cover;
+}
+
+.album h3 {
+  display: flex;
+  margin: 0.8rem 0 0;
+  padding: 0.75rem 0 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1.55rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.album h3 svg {
+  width: 1.45rem;
+  height: 1.45rem;
+  padding: 0.42rem;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0.3rem 0 var(--home-cyan);
+  color: var(--home-ink);
+  transition: transform 160ms ease;
+}
+
+.album:hover h3 svg,
+.album:focus-visible h3 svg {
+  transform: translate(0.12rem, -0.12rem);
+}
+
+@media (min-width: 800px) {
+  .topbar,
+  .heroCopy {
+    padding-right: 4vw;
+    padding-left: 4vw;
+  }
+
+  .logo {
+    width: 10rem;
+  }
+
+  .heroVideo {
+    width: min(56vw, 48rem);
+    right: 4vw;
+    left: auto;
+    object-fit: cover;
+  }
+
+  .hero::before {
+    position: absolute;
+    inset: 0;
+    background: var(--home-ink-soft);
+    content: "";
+  }
+
+  .heroShade {
+    background: linear-gradient(90deg, rgba(5, 17, 23, 0.94) 0%, rgba(5, 17, 23, 0.45) 48%, rgba(5, 17, 23, 0.18));
+  }
+
+  .heroCopy {
+    padding-bottom: 4rem;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(7rem, 10vw, 10rem);
+  }
+
+  .experiencesDoor {
+    padding: 7rem 5vw;
+  }
+
+  .experiencesInner h2 {
+    font-size: clamp(5rem, 8vw, 8rem);
+  }
+
+  .experiencesCard {
+    aspect-ratio: 16 / 9;
+  }
+
+  .experiencesPhotoStack {
+    top: 1.75rem;
+    right: 1.75rem;
+    width: 24%;
+  }
+
+  .experiencesBottom {
+    right: 1.6rem;
+    bottom: 1.5rem;
+    left: 1.6rem;
+  }
+
+  .experiencesDestination {
+    font-size: 2.6rem;
+  }
+
+  .lightSection,
+  .archives {
+    padding: 6rem 5vw;
+  }
+
+  .sectionHead {
+    justify-content: flex-start;
+    gap: 2.25rem;
+  }
+
+  .sectionHead p {
+    max-width: 13rem;
+  }
+
+  .eventTrack,
+  .albumTrack {
+    margin-right: -5vw;
+    padding-right: 5vw;
+  }
+
+  .event {
+    flex-basis: 31%;
+  }
+
+  .album {
+    flex-basis: 35%;
+  }
+
+  .albumCollage {
+    height: 29rem;
+  }
+
+  .stay {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2.5rem 5vw;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiencesMainImage,
+  .experiencesArrow,
+  .event,
+  .eventAction svg,
+  .album,
+  .album h3 svg {
+    transition: none;
+  }
+}

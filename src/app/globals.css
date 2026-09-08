@@ -34,33 +34,24 @@ a { color: inherit; text-decoration: none; }
 .brand-logo { display: block; width: auto; object-fit: contain; }
 .brand-logo--header { height: 2.7rem; }
 .brand-logo--footer { height: 2.6rem; }
-.brand-logo--experiences-header {
-  height: 3.1rem;
-  filter: drop-shadow(0 0.18rem 0.35rem rgba(4, 15, 20, 0.55));
-}
 .partner-lockup {
   display: flex;
   width: fit-content;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.16rem;
 }
 .partner-lockup__cross {
-  display: grid;
-  width: 0.8rem;
-  height: 0.8rem;
-  place-items: center;
   color: #fff;
   font-size: 0.8rem;
   font-weight: 900;
-  line-height: 1;
+  line-height: 0.8;
 }
 .partner-lockup__neway {
   display: block;
-  width: 9rem;
+  width: 7.2rem;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0.14rem 0.3rem rgba(4, 15, 20, 0.5));
 }
 
 .hero {
@@ -85,13 +76,7 @@ a { color: inherit; text-decoration: none; }
 .hero__video, .hero__shade { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero__video { display: block; object-fit: cover; object-position: center; }
 .hero__shade {
-  background: linear-gradient(
-    180deg,
-    rgba(7, 24, 31, 0.62) 0%,
-    rgba(7, 24, 31, 0.2) 24%,
-    rgba(9, 24, 30, 0.03) 43%,
-    rgba(9, 24, 30, 0.86) 100%
-  );
+  background: linear-gradient(180deg, rgba(9, 24, 30, 0.14), rgba(9, 24, 30, 0.02) 42%, rgba(9, 24, 30, 0.86));
 }
 .hero__copy {
   position: relative;
@@ -528,7 +513,7 @@ a { color: inherit; text-decoration: none; }
   width: fit-content;
   flex-direction: column;
   align-items: center;
-  gap: 0.22rem;
+  gap: 0.12rem;
 }
 .footer__brand-lockup > span {
   color: #fff;
@@ -538,13 +523,10 @@ a { color: inherit; text-decoration: none; }
 }
 .footer__brand-lockup .brand-logo--footer {
   width: auto;
-  height: clamp(1.15rem, 4.5vw, 1.6rem);
-}
-.footer__brand-lockup .brand-logo--experiences-footer {
-  height: clamp(2.45rem, 7.6vw, 3rem);
+  height: clamp(2.15rem, 8vw, 2.8rem);
 }
 .footer__brand-lockup .footer__neway {
-  width: 7.3rem;
+  width: 6.8rem;
   height: auto;
 }
 .footer__title {
@@ -591,6 +573,49 @@ a { color: inherit; text-decoration: none; }
   stroke-width: 1.8;
 }
 .social-links__dot { fill: currentColor; stroke: none; }
+.social-links__instagram { fill: currentColor !important; stroke: none !important; }
+.social-links__tiktok { fill: currentColor !important; stroke: none !important; }
+.social-links__whatsapp { fill: currentColor !important; stroke: none !important; }
+
+.footer .social-links a,
+.footer .social-links a:hover,
+.footer .social-links a:focus-visible {
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  outline: none;
+}
+
+.social-links--list {
+  display: block;
+  border-top: 1px solid rgba(21, 43, 52, 0.24);
+}
+.social-links.social-links--list a {
+  display: flex;
+  width: 100%;
+  height: auto;
+  min-height: 4.75rem;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  border-bottom: 1px solid rgba(21, 43, 52, 0.24);
+  border-radius: 0;
+  color: var(--ink);
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+.social-links.social-links--list a:hover {
+  padding-inline: 0.7rem;
+  border-color: rgba(21, 43, 52, 0.24);
+  background: var(--sky);
+  color: var(--ink);
+}
+.social-links--list .social-links__arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+}
 .footer__meta-row {
   display: flex;
   align-items: flex-end;
@@ -616,8 +641,7 @@ a { color: inherit; text-decoration: none; }
   .topbar, .hero__copy { padding-inline: 5vw; }
   .brand-logo--header { height: 3.35rem; }
   .brand-logo--footer { height: 3rem; }
-  .brand-logo--experiences-header { height: 3.8rem; }
-  .partner-lockup__neway { width: 10.8rem; }
+  .partner-lockup__neway { width: 8.8rem; }
   .hero { min-height: 44rem; }
   .hero h1 { max-width: 9ch; font-size: clamp(5.8rem, 9vw, 9rem); }
   .hero__copy { padding-bottom: 4rem; }
@@ -645,9 +669,8 @@ a { color: inherit; text-decoration: none; }
     align-items: start;
     gap: 3rem;
   }
-  .footer__brand-lockup .brand-logo--footer { width: auto; height: 2.5rem; }
-  .footer__brand-lockup .brand-logo--experiences-footer { height: 3.2rem; }
-  .footer__brand-lockup .footer__neway { width: 9.5rem; height: auto; }
+  .footer__brand-lockup .brand-logo--footer { width: auto; height: 4.2rem; }
+  .footer__brand-lockup .footer__neway { width: 9rem; height: auto; }
   .footer__title { font-size: 2.9rem; text-align: right; }
   .footer__meta-row { justify-content: flex-end; gap: 2rem; padding-top: 0.35rem; }
   .social-links a { width: 2.65rem; height: 2.65rem; }
