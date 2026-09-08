@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { ExperienceCollages } from "@/components/ExperienceCollages";
 import { GroupFinder } from "@/components/GroupFinder";
 import { HeroVideo } from "@/components/HeroVideo";
@@ -36,7 +37,9 @@ export default function ThirstyExperiencesPage() {
       <header className="hero">
         <div className="topbar" aria-label="Capçalera">
           <div className="partner-lockup" aria-label="Thirsty en col·laboració amb Neway">
-            <Image className="brand-logo brand-logo--header" src="/media/thirsty-logo-transparent.webp" alt="Thirsty" width={800} height={312} priority />
+            <Link href="/" aria-label="Tornar a l'inici de Thirsty">
+              <Image className="brand-logo brand-logo--header" src="/media/thirsty-logo-transparent.webp" alt="Thirsty" width={800} height={312} priority />
+            </Link>
             <span className="partner-lockup__cross" aria-hidden="true">×</span>
             <Image className="partner-lockup__neway" src="/media/neway-logo-blanc.png" alt="Neway" width={1126} height={146} priority />
           </div>
