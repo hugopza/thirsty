@@ -130,6 +130,8 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* Temporalment ocult: la secció de pròximes dates tornarà quan hi hagi més d'un esdeveniment. */}
+        {false && (
         <section className={`${styles.lightSection} ${styles.datesSection}`} aria-labelledby="dates-title">
           <div className={styles.sectionHead}>
             <h2 id="dates-title">Pròximes<br />dates.</h2>
@@ -157,10 +159,7 @@ export default async function HomePage() {
             </a>
           </div>
         </section>
-
-        <section className={`${styles.lightSection} ${styles.stay}`} aria-label="Xarxes socials de Thirsty">
-          <SocialLinks />
-        </section>
+        )}
 
         <section id="archives" className={styles.archives} aria-labelledby="archives-title">
           <div className={styles.sectionHead}>
@@ -188,6 +187,10 @@ export default async function HomePage() {
               </a>
             ))}
           </div>
+        </section>
+
+        <section className={`${styles.lightSection} ${styles.stay}`} aria-label="Xarxes socials de Thirsty">
+          <SocialLinks />
         </section>
       </main>
 
